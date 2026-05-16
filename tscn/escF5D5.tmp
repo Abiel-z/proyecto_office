@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5gdcmbmi5tu2"]
+
+[ext_resource type="PackedScene" uid="uid://ddibr07fl5tn3" path="res://tscn/escena.tscn" id="1_sheig"]
+[ext_resource type="PackedScene" uid="uid://bb5rs3gnvnupt" path="res://tscn/player.tscn" id="2_qfepm"]
+[ext_resource type="PackedScene" uid="uid://bsnmotlps06o6" path="res://tscn/mesa.tscn" id="4_q3ai7"]
+[ext_resource type="PackedScene" uid="uid://s0uiku142yun" path="res://tscn/hoja_en_blanco.tscn" id="4_woco5"]
+
+[node name="escenario" type="Node3D"]
+
+[node name="escena" parent="." instance=ExtResource("1_sheig")]
+freeze = true
+
+[node name="player" parent="." instance=ExtResource("2_qfepm")]
+transform = Transform3D(-0.0416315, 0, -0.999133, 0, 1, 0, 0.999133, 0, -0.0416315, 2.10913, 0, -5.0699)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.55024, 2.60305, -4.17065)
+
+[node name="mesa" parent="." instance=ExtResource("4_q3ai7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -5)
+
+[node name="hoja_en_blanco" parent="." instance=ExtResource("4_woco5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7588, 1.17181, -4.64703)

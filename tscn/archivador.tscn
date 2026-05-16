@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsn7uiictxb14"]
+
+[ext_resource type="PackedScene" uid="uid://d3oi2c0d1tmo6" path="res://datos blender/archivador.glb" id="1_i6ov6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7xgtw"]
+size = Vector3(1, 2.15167, 0.868225)
+
+[node name="archivador" type="RigidBody3D"]
+
+[node name="archivador" parent="." instance=ExtResource("1_i6ov6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.835729, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06631, 0.00350952)
+shape = SubResource("BoxShape3D_7xgtw")

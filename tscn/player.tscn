@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb5rs3gnvnupt"]
+
+[ext_resource type="Script" path="res://gd/player.gd" id="1_yntug"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s21tv"]
+margin = 0.0
+radius = 0.2
+height = 1.65
+
+[node name="player" type="CharacterBody3D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_yntug")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.834832, 0)
+shape = SubResource("CapsuleShape3D_s21tv")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65, 0)
+
+[node name="OmniLight3D" type="SpotLight3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.802037, -1.18035, -0.946897)
+spot_range = 21.8944
+spot_angle = 57.2596
+
+[node name="A" type="Marker3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.123471, -0.243569, -1.2628)
+
+[node name="hoja_hold_point" type="Marker3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.478314, -0.249428, -0.762128)
+
+[node name="carpeta_hold_point" type="Marker3D" parent="Camera3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.056, -0.155857, -0.666057)
+
+[node name="timbre_hold_point" type="Marker3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.243, -0.149, -0.477055)
+
+[node name="Puntero" type="Sprite2D" parent="Camera3D"]

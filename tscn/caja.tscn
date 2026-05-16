@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxoq2kpv5wq0y"]
+
+[ext_resource type="PackedScene" uid="uid://duo8y1r50uy6q" path="res://datos blender/caja.glb" id="1_funk6"]
+[ext_resource type="Script" path="res://gd/caja.gd" id="1_okvqv"]
+[ext_resource type="PackedScene" uid="uid://cjboy45uf60n4" path="res://datos blender/cubo_rojo.glb" id="4_vgusp"]
+[ext_resource type="PackedScene" uid="uid://cddbqsdf73c7g" path="res://datos blender/cubo_azul.glb" id="5_hulsm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8u6d0"]
+size = Vector3(0.6672, 0.429558, 1.1916)
+
+[node name="caja" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00363284, -0.00457954, -0.00335279)
+collision_layer = 3
+collision_mask = 2
+mass = 0.5
+script = ExtResource("1_okvqv")
+
+[node name="modelo" parent="." instance=ExtResource("1_funk6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00733517, 0, 0.000616953)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00726466, 0.20306, 0.06631)
+shape = SubResource("BoxShape3D_8u6d0")
+
+[node name="slots_container" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.085911, 0, 0.00522488)
+
+[node name="slot_1" type="Node3D" parent="slots_container"]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 0.0843634, 0.255498, 0.59119)
+
+[node name="cubo_rojo" parent="slots_container/slot_1" instance=ExtResource("4_vgusp")]
+
+[node name="slot_2" type="Node3D" parent="slots_container"]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 0.0843634, 0.255498, 0.457174)
+
+[node name="cubo_azul" parent="slots_container/slot_2" instance=ExtResource("5_hulsm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0250478, 0, 0)
+
+[node name="slot_3" type="Node3D" parent="slots_container"]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 0.0843634, 0.255498, 0.330579)
+
+[node name="cubo_rojo" parent="slots_container/slot_3" instance=ExtResource("4_vgusp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0327579, 0, 0)
+
+[node name="slot_4" type="Node3D" parent="slots_container"]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 0.0843634, 0.255498, 0.204535)
+
+[node name="cubo_azul" parent="slots_container/slot_4" instance=ExtResource("5_hulsm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0425911, 0, 0)
+
+[node name="slot_5" type="Node3D" parent="slots_container"]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 0.0843634, 0.255498, 0.0916321)
+
+[node name="cubo_rojo" parent="slots_container/slot_5" instance=ExtResource("4_vgusp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0287938, 0, 0)
+
+[node name="slot_6" type="Node3D" parent="slots_container"]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 0.0843634, 0.255498, -0.0332539)
+
+[node name="cubo_azul" parent="slots_container/slot_6" instance=ExtResource("5_hulsm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0315194, 0, 0)
+
+[node name="slot_7" type="Node3D" parent="slots_container"]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 0.0843634, 0.255498, -0.168977)
+
+[node name="cubo_rojo" parent="slots_container/slot_7" instance=ExtResource("4_vgusp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0640237, -5.96046e-08, 0)
+
+[node name="slot_8" type="Node3D" parent="slots_container"]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 0.0843634, 0.255498, -0.256686)
+
+[node name="cubo_azul" parent="slots_container/slot_8" instance=ExtResource("5_hulsm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0299644, 0, 0)
+
+[node name="slot_9" type="Node3D" parent="slots_container"]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 0.0843634, 0.255498, -0.366153)
+
+[node name="cubo_rojo" parent="slots_container/slot_9" instance=ExtResource("4_vgusp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0251738, 0, 0)
+
+[node name="slot_10" type="Node3D" parent="slots_container"]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 0.0843634, 0.255498, -0.460838)
+
+[node name="cubo_azul" parent="slots_container/slot_10" instance=ExtResource("5_hulsm")]
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.193341, 0, 0.220961)

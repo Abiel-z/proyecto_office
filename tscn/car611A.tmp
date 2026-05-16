@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://teglu8burfwl"]
+
+[ext_resource type="Script" path="res://gd/carpeta.gd" id="1_t23bs"]
+[ext_resource type="PackedScene" uid="uid://5u0hln3fj65f" path="res://datos blender/carpeta_cerrada.glb" id="2_qrxom"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b3iyd"]
+size = Vector3(0.947037, 0.605698, 0.164215)
+
+[node name="carpeta" type="RigidBody3D"]
+script = ExtResource("1_t23bs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0176314, 0.277766, -0.00762415)
+shape = SubResource("BoxShape3D_b3iyd")
+
+[node name="carpeta_cerrada" parent="." instance=ExtResource("2_qrxom")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26981, -0.303877)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.215012, 0.478261, 0)
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(1, 1, 1, 0)
+text = "TEXTO PRUEBA"
+font_size = 10

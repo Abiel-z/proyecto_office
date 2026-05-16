@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b380gesn5ij8p"]
+
+[ext_resource type="PackedScene" uid="uid://4lkt40ov8s3q" path="res://datos blender/fotocopiadora.glb" id="1_k075u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8fcgw"]
+size = Vector3(1.27582, 0.999878, 0.998901)
+
+[node name="fotocopiadora" type="RigidBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0445862, 0.499543, -0.093811)
+shape = SubResource("BoxShape3D_8fcgw")
+
+[node name="fotocopiadora" parent="." instance=ExtResource("1_k075u")]

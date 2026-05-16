@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsnmotlps06o6"]
+
+[ext_resource type="PackedScene" uid="uid://cjhq8kaiqcm6h" path="res://datos blender/mesa.glb" id="1_1flho"]
+[ext_resource type="Script" path="res://gd/mesa.gd" id="1_8q2sn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l0s1x"]
+size = Vector3(1.08301, 0.082733, 1.92932)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n1yh3"]
+size = Vector3(0.105225, 1.10699, 0.147705)
+
+[node name="mesa" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.114759, 0)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_8q2sn")
+
+[node name="mesa" parent="." instance=ExtResource("1_1flho")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0820791, 0, 0.059062)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0743417, 1.10143, 0.153186)
+shape = SubResource("BoxShape3D_l0s1x")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.506271, 0.553689, -0.71295)
+shape = SubResource("BoxShape3D_n1yh3")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37561, 0.558502, -0.678589)
+shape = SubResource("BoxShape3D_n1yh3")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37561, 0.558502, 0.948575)
+shape = SubResource("BoxShape3D_n1yh3")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.493882, 0.558502, 0.948575)
+shape = SubResource("BoxShape3D_n1yh3")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c46obgx0bh18r"]
+
+[ext_resource type="Script" path="res://gd/timbre.gd" id="1_4vyp3"]
+[ext_resource type="PackedScene" uid="uid://b3qqq4wuohcsf" path="res://datos blender/timbre.glb" id="2_1sfe1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wlvft"]
+size = Vector3(0.108459, 0.143677, 0.110596)
+
+[node name="timbre" type="RigidBody3D"]
+script = ExtResource("1_4vyp3")
+
+[node name="timbre" parent="." instance=ExtResource("2_1sfe1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0482173, 0, -0.059885)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0487366, 0.0199585, -0.0574951)
+shape = SubResource("BoxShape3D_wlvft")
