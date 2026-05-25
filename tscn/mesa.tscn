@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://gd/mesa.gd" id="1_8q2sn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l0s1x"]
-size = Vector3(1.08301, 0.082733, 1.92932)
+size = Vector3(1.1167, 0.103378, 2.06168)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n1yh3"]
 size = Vector3(0.105225, 1.10699, 0.147705)
@@ -19,7 +19,7 @@ script = ExtResource("1_8q2sn")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0820791, 0, 0.059062)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0743417, 1.10143, 0.153186)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0574965, 1.11175, 0.113223)
 shape = SubResource("BoxShape3D_l0s1x")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="."]

@@ -1,4 +1,4 @@
 extends StaticBody3D
 
 func _ready():
-	pass
+	add_to_group("superficie")

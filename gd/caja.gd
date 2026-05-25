@@ -22,7 +22,6 @@ func _ready():
 	add_to_group("agarrable")
 	crear_debug_basis()
 	for slot_node in $slots_container.get_children():
-		print("POSICION SLOT :", slot_node.position)
 		var slot_data = {
 			"nodo": slot_node,
 			"ocupado": false,

@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://cv42w14ltjvwr"]
+
+[ext_resource type="PackedScene" uid="uid://ddibr07fl5tn3" path="res://tscn/escena.tscn" id="1_sheig"]
+[ext_resource type="PackedScene" uid="uid://bb5rs3gnvnupt" path="res://tscn/player.tscn" id="2_qfepm"]
+[ext_resource type="PackedScene" uid="uid://ck4p3vb4t5r1a" path="res://tscn/boton_validacion.tscn" id="9_pks04"]
+[ext_resource type="PackedScene" uid="uid://cpm85fmv03y7h" path="res://tscn/punto_entrega.tscn" id="10_v4rg1"]
+[ext_resource type="PackedScene" uid="uid://dmagwvg3e8qfa" path="res://tscn/escritorio.tscn" id="11_mxiec"]
+
+[node name="escenario" type="Node3D"]
+
+[node name="escena" parent="." instance=ExtResource("1_sheig")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.03962, 0.0471717, 5.90765)
+
+[node name="boton_validacion" parent="." instance=ExtResource("9_pks04")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.42791, 1.10118, 0.763693)
+
+[node name="escritorio" parent="." instance=ExtResource("11_mxiec")]
+transform = Transform3D(0.0442645, 0, -0.99902, 0, 1, 0, 0.99902, 0, 0.0442645, -2.26177, -0.0765815, 1.45962)
+
+[node name="punto_entrega" parent="." instance=ExtResource("10_v4rg1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6277, 0.734635, -0.920789)
+
+[node name="player" parent="." instance=ExtResource("2_qfepm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.692712, -0.0648122, -0.0227022)

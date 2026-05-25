@@ -26,6 +26,14 @@ func cambiar_color_luz(color: Color):
 func apagar_luz():
 	luz.light_energy = 0.0
 
+func on_click(player):
+	anim.play("presionar")
+	await anim.animation_finished
+	boton_presionado.emit()
+	print("señal emitida")
+	anim.play_backwards("presionar",2)
+	#punto_entrega.revisar()
+	
 func interactuar():
 	anim.play("presionar")
 	await anim.animation_finished

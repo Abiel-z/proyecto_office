@@ -2,9 +2,11 @@ extends RigidBody3D
 class_name Hoja
 
 enum EstadoFisico {
+	ESPERANDO,
 	CAIDA,
 	FLOTANDO,
 	GUARDADA,
+	ARRASTRANDO,
 	EN_MANO
 }
 
@@ -15,11 +17,12 @@ enum EstadoDocumento {
 	RECHAZADO
 }
 
+var errores := {}
 var estado_fisico : EstadoFisico = EstadoFisico.GUARDADA
 var estado_documento : EstadoDocumento = EstadoDocumento.NORMAL
 
 var being_held = false
-var camera_ref = null
+var player_ref = null
 var original_gravity = 0.8
 var image_texture: ImageTexture
 
@@ -28,7 +31,8 @@ var image_texture: ImageTexture
 @onready var label_texto = $SubViewport/Control/MarginContainer/vbox/RichTextLabel
 @onready var label_n_pagina = $SubViewport/Control/MarginContainer/vbox/n_pagina
 @onready var sello = $SubViewport/sello
-@onready var modelo_hoja = $hoja_blanca/Cube
+@onready var modelo_hoja = $VisualPivot/model
+@onready var visual_pivot = $VisualPivot
 
 @onready var punto_A : Marker3D = $punto_A
 @onready var punto_B : Marker3D = $punto_B
@@ -41,6 +45,7 @@ var posicion_guardada: Vector3 = Vector3.ZERO
 var rotacion_guardada: Vector3 = Vector3.ZERO
 
 var documento : Documento
+@onready var debug_flecha = $debug_flecha
 
 func _ready():
 	add_to_group("hojas")
@@ -54,13 +59,23 @@ func _ready():
 	revisar_guardado()
 	_actualizar_estado_fisico()
 
+func _physics_process(delta):
+	actualizar_flecha_debug()
+	corregir_altura()
+
+func agregar_error(id_error : String):
+	if not errores.has(id_error):
+		errores[id_error] = true
+
+func limpiar_errores():
+	errores.clear()
+
 func timbrar():
 	estado_documento = EstadoDocumento.TIMBRADO
 	sello.visible = true
 
 func set_documento(doc: Documento):
 	documento = doc
-	
 	if not is_inside_tree():
 		await ready
 	
@@ -76,16 +91,19 @@ func aplicar_textura():
 	
 	material.albedo_texture = texture
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	material.cull_mode = BaseMaterial3D.CULL_FRONT
 	
 	modelo_hoja.material_override = material
 
 func actualizar_visual():
 	if not documento:
 		return
-	label_texto.text = (
-		DatabaseTrabajadores.generar_bbcode_documento(documento)
-	)
+	label_texto.text = documento.cuerpo
+
+func reiniciar_pivot():
+	visual_pivot.position = Vector3.ZERO
+	visual_pivot.rotation = Vector3.ZERO
+	visual_pivot.scale = Vector3.ONE
 
 func revisar_guardado():
 	if carpeta_padre == null:
@@ -97,7 +115,21 @@ func set_estado_fisico(nuevo_estado: EstadoFisico):
 
 func _actualizar_estado_fisico():
 	match estado_fisico:
-
+		
+		EstadoFisico.ESPERANDO:
+			freeze = true
+			gravity_scale = 0
+			collision_layer = 5
+			collision_mask = 5
+			linear_velocity = Vector3.ZERO
+			angular_velocity = Vector3.ZERO
+		
+		EstadoFisico.ARRASTRANDO:
+			freeze = false
+			gravity_scale = original_gravity
+			collision_layer = 1
+			collision_mask = 1
+		
 		EstadoFisico.GUARDADA:
 			freeze = true
 			gravity_scale = 0
@@ -121,8 +153,8 @@ func _actualizar_estado_fisico():
 		EstadoFisico.EN_MANO:
 			freeze = false
 			gravity_scale = 0
-			collision_layer = 1
-			collision_mask = 1
+			collision_layer = 0
+			collision_mask = 0
 			linear_velocity = Vector3.ZERO
 			angular_velocity = Vector3.ZERO
 
@@ -135,31 +167,77 @@ func esta_en_carpeta() -> bool:
 func get_carpeta_padre() -> Node3D:
 	return carpeta_padre
 
-func grab(camera):
-	
-	being_held = true
-	camera_ref = camera
+func on_click(player):
+	if being_held:
+		return
+	player.held_sheets.append(self)
+	player_ref = player
 	set_estado_fisico(EstadoFisico.EN_MANO)
-	gravity_scale = 0
-	linear_velocity = Vector3.ZERO
-	angular_velocity = Vector3.ZERO
+
+func empezar_arrastre(player):
+	player_ref = player
+	set_estado_fisico(EstadoFisico.ARRASTRANDO)
+
+func terminar_arrastre(player):
+	player_ref = null
+	#linear_velocity = Vector3.ZERO
+	set_estado_fisico(EstadoFisico.CAIDA)
+
+func grab(camera):
+	being_held = true
+	player_ref = camera
+	set_estado_fisico(EstadoFisico.EN_MANO)
 
 func release():
 	being_held = false
-	camera_ref = null
+	player_ref = null
 	gravity_scale = original_gravity
 	set_estado_fisico(EstadoFisico.CAIDA)
 
-func _physics_process(delta):
+func arrastrar(target: Vector3):
+	var dir = target - global_position
+	linear_velocity = dir * 18.0
+	angular_velocity *= 0.85
 
-	# SOLO si está libre
-	if being_held and camera_ref and estado_fisico != EstadoFisico.GUARDADA:
+func actualizar_flecha_debug():
+	debug_flecha.visible = true
+	debug_flecha.position = Vector3.ZERO
+	#debug_flecha.scale = Vector3(,0,0.1)
+	debug_flecha.position.y = 0.2
 
-		linear_velocity = Vector3.ZERO
-		angular_velocity = Vector3.ZERO
+func corregir_altura():
+	# no corregir mientras cae rápido
+	if linear_velocity.length() > 0.1:
+		return
 
-		var look_pos = camera_ref.global_transform.origin
-		look_pos.y = global_transform.origin.y
+	# detectar superficie cercana
+	var espacio = get_world_3d().direct_space_state
+	#print("DETECADO : " , espacio)
 
-		look_at(look_pos, Vector3.UP)
-		rotate_y(deg_to_rad(-90))
+	var origen = global_position
+	var destino = global_position + -global_basis.y * 0.05
+
+	var query = PhysicsRayQueryParameters3D.create(
+		origen,
+		destino
+	)
+
+	query.exclude = [self]
+
+	var result = espacio.intersect_ray(query)
+
+	# si toca una superficie
+	if result and result.collider.is_in_group("superficies"):
+
+		# NORMAL de la hoja
+		var normal_hoja = -global_basis.y.normalized()
+
+		# OFFSET VISUAL
+		var offset_visual = normal_hoja * 1
+
+		visual_pivot.position = offset_visual
+
+	else:
+
+		# resetear si no toca nada
+		visual_pivot.position = Vector3.ZERO

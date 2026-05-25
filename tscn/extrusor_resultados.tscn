@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://0kndfdtdyfij"]
+
+[ext_resource type="PackedScene" uid="uid://co61glbxsuguj" path="res://datos blender/dispensador_de_resultados.glb" id="1_j7kxg"]
+[ext_resource type="Script" path="res://gd/extrusor_resultados.gd" id="1_r0lu3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3sb5g"]
+size = Vector3(0.223022, 0.165436, 0.452942)
+
+[node name="extrusor_resultados" type="StaticBody3D"]
+script = ExtResource("1_r0lu3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0247318, 0.0521646, 0.0140706)
+shape = SubResource("BoxShape3D_3sb5g")
+
+[node name="dispensador_de_resultados" parent="." instance=ExtResource("1_j7kxg")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0.0236003, -0.0371647, -0.00971683)
+
+[node name="punto_salida" type="Marker3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.0185685, 0.0483848, 0)

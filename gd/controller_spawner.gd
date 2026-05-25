@@ -1,5 +1,5 @@
 extends Node
-class_name ControllerSpawners
+#class_name ControllerSpawners
 
 var CajaScene = preload("res://tscn/caja.tscn")
 var CarpetaScene = preload("res://tscn/carpeta.tscn")
@@ -15,7 +15,7 @@ func _ready():
 
 func generar_carpetas_iniciales():
 	var scene = get_tree().current_scene
-	var spawn_container = scene.get_node("SpawnPoints")
+	var spawn_container = scene.get_node("controller_spawner")
 	var trabajadores = DatabaseTrabajadores.get_trabajadores()
 
 	for i in range(trabajadores.size()):
@@ -28,9 +28,6 @@ func generar_carpetas_iniciales():
 
 		# POSICION BASE
 		carpeta.global_transform = spawn.global_transform
-		# OFFSET
-		carpeta.global_position += Vector3( i * 0.4, 0 , 0)
-		
 		# GENERAR DOCUMENTOS
 		var documentos = DatabaseTrabajadores.generar_documentos_para_trabajador(trabajador)
 		for documento in documentos:
@@ -38,6 +35,12 @@ func generar_carpetas_iniciales():
 			carpeta.agregar_hoja(hoja)
 		carpeta.abrir_carpeta()
 		carpeta.cerrar_carpeta()
+		var impulso = Vector3(
+			randf_range(-1.5, 1.5),
+			randf_range(-0.5, -2.0),
+			randf_range(-1.5, 1.5)
+		)
+		carpeta.apply_impulse(impulso * 3.0)
 
 # 🧠 helper base
 func _add_to_scene(node: Node, parent: Node = null):

@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmagwvg3e8qfa"]
+
+[ext_resource type="PackedScene" uid="uid://bogy2qwe4focg" path="res://datos blender/escritorio.glb" id="1_4y1tb"]
+[ext_resource type="Script" path="res://tscn/escritorio.gd" id="1_doffy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q68lj"]
+size = Vector3(0.696873, 0.0727539, 2.20976)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c2fmh"]
+size = Vector3(0.484741, 0.0795898, 0.627106)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ojsfv"]
+size = Vector3(0.0805664, 0.873474, 0.672043)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_74t5p"]
+height = 0.911244
+radius = 0.0358407
+
+[node name="escritorio" type="RigidBody3D"]
+script = ExtResource("1_doffy")
+
+[node name="escritorio" parent="." instance=ExtResource("1_4y1tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.211788, -1.19209e-07, 0.0703192)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0142269, 0.889159, 0.0854568)
+shape = SubResource("BoxShape3D_q68lj")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.576024, 0.889, 0.878839)
+shape = SubResource("BoxShape3D_c2fmh")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.738866, 0.437505, 0.88392)
+shape = SubResource("BoxShape3D_ojsfv")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.00545776, 0.436969, -0.984877)
+shape = SubResource("BoxShape3D_ojsfv")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.30652, 0.45609, 1.12814)
+shape = SubResource("CylinderShape3D_74t5p")

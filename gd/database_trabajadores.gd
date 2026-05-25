@@ -61,101 +61,6 @@ func cargar_trabajadores_iniciales():
 		Trabajador.nuevo(3, "Lucía Fernández", "ABOGADO"),
 	]
 
-func generar_documentos_para_trabajador(trabajador: Trabajador) -> Array[Documento]:
-	var lista : Array[Documento] = []
-	var tipos = documentos_por_cargo.get(trabajador.cargo, [])
-	
-	for tipo in tipos:
-		var doc = generar_documento(tipo, trabajador)
-		doc.owner_id = 1
-		doc.subject_id = trabajador.id
-		doc.contexto = "RRHH"
-		lista.append(doc)
-	return lista
-
-func generar_bbcode_documento(doc: Documento) -> String:
-	match doc.tipo:
-		Documento.TipoDocumento.CONTRATO:
-			return generar_contrato(doc)
-		Documento.TipoDocumento.HORARIO:
-			return generar_horario(doc)
-		Documento.TipoDocumento.SALUD:
-			return generar_salud(doc)
-	return "[color=red]DOCUMENTO INVALIDO[/color]"
-
-func generar_contrato(doc: Documento) -> String:
-	var txt := ""
-	txt += "[font_size=20]"
-	txt += "[b][center] CONTRATO DE TRABAJO [/center][/b]\n\n"
-	txt += "[font_size=12]"
-	txt += "En la ciudad de [color=#6666aa]" + doc.cargo + "[/color], "
-	txt += "con fecha de contratación [color=#888888]" + doc.fecha + "[/color], "
-	txt += "entre la empresa y el/la trabajador/a "
-
-	txt += "[color=#2a2a2a][b]" + doc.nombre + "[/b][/color], "
-	txt += "se establece el siguiente acuerdo laboral.\n\n"
-
-	txt += "[font_size=18][b]ANTECEDENTES[/b][/font_size]\n"
-	txt += "El/la trabajador/a desempeñará funciones en calidad de "
-	txt += "[color=#4444aa][b]" + doc.cargo + "[/b][/color] "
-	txt += "bajo supervisión directa de la empresa contratante.\n\n"
-
-	txt += "[font_size=18][b]CONDICIONES[/b][/font_size]\n"
-	txt += "Sueldo base establecido en [color=#888888]$[dato clasificado][/color]. "
-	txt += "Bonificaciones sujetas a evaluación interna.\n\n\n\n\n\n\n\n"
-
-	txt += "[center] ________________                                    _________________ \n "
-	txt += "[i][font_size=10]FIRMA EMPRESA                                      FIRMA TRABAJADOR"
-	return txt
-
-func generar_horario(doc : Documento) -> String:
-	var txt := ""
-
-	txt += "[center]"
-	txt += "[font_size=28]"
-	txt += "[b]HORARIO LABORAL[/b]"
-	txt += "[/font_size]"
-	txt += "[/center]\n\n"
-
-	txt += "[b]TRABAJADOR:[/b] "
-	txt += doc.nombre + "\n"
-
-	txt += "[b]CARGO:[/b] "
-	txt += doc.cargo + "\n"
-
-	txt += "[b]FECHA:[/b] "
-	txt += doc.fecha + "\n\n"
-
-	txt += doc.contenido
-
-	txt += "\n\n[right][i]1/3[/i][/right]"
-
-	return txt
-
-func generar_salud(doc : Documento) -> String:
-	var txt := ""
-
-	txt += "[center]"
-	txt += "[font_size=28]"
-	txt += "[b]CERTIFICADO SALUD[/b]"
-	txt += "[/font_size]"
-	txt += "[/center]\n\n"
-
-	txt += "[b]TRABAJADOR:[/b] "
-	txt += doc.nombre + "\n"
-
-	txt += "[b]CARGO:[/b] "
-	txt += doc.cargo + "\n"
-
-	txt += "[b]FECHA:[/b] "
-	txt += doc.fecha + "\n\n"
-
-	txt += doc.contenido
-
-	txt += "\n\n[right][i]1/3[/i][/right]"
-
-	return txt
-
 func generar_documento(tipo: Documento.TipoDocumento, trabajador: Trabajador) -> Documento:
 	var doc = Documento.new()
 	doc.tipo = tipo
@@ -167,8 +72,21 @@ func generar_documento(tipo: Documento.TipoDocumento, trabajador: Trabajador) ->
 	doc.nombre = trabajador.nombre
 	doc.cargo = trabajador.cargo
 	doc.fecha = Time.get_date_string_from_system()
+	doc.cuerpo = RenderDocumentos.generar_bbcode_documento(doc)
 	
 	return doc
+
+func generar_documentos_para_trabajador(trabajador: Trabajador) -> Array[Documento]:
+	var lista : Array[Documento] = []
+	var tipos = documentos_por_cargo.get(trabajador.cargo, [])
+	
+	for tipo in tipos:
+		var doc = generar_documento(tipo, trabajador)
+		doc.owner_id = 1
+		doc.subject_id = trabajador.id
+		doc.contexto = "RRHH"
+		lista.append(doc)
+	return lista
 
 func agregar_trabajador( id:int , nombre: String, cargo: String) -> Trabajador:
 	if not documentos_por_cargo.has(cargo):
@@ -191,3 +109,4 @@ func get_trabajadores() -> Array[Trabajador]:
 
 func obtener_documentos_de_cargo(cargo: String) -> Array:
 	return documentos_por_cargo.get(cargo, [])
+

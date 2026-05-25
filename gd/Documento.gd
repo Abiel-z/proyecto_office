@@ -2,6 +2,7 @@ extends Resource
 class_name Documento
 
 enum TipoDocumento {
+	REVISION,
 	CONTRATO,
 	HORARIO,
 	SALUD
@@ -14,9 +15,11 @@ enum TipoDocumento {
 @export var id : String 
 @export var titulo : String
 @export var contenido : String
+@export var cuerpo : String
 
 @export var owner_id : int
 @export var subject_id : int
 @export var contexto : String
 
 @export var estado : String = "activo"
+@export var metadata := {}

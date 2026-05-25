@@ -1,21 +1,22 @@
 extends RigidBody3D
 
 enum EstadoFisico {
-	LIBRE,
-	GUARDADO,
-	SOSTENIDO
+	CAIDA,
+	EN_MANO,
+	ARRASTRANDO,
+	GUARDADO
 }
 enum EstadoRevision {
-		PENDIENDE,
+		PENDIENTE,
 		APROVADA,
 		RECHAZADA
 }
 var errores_detectados : Array = []
 
-var estado_fisico : EstadoFisico = EstadoFisico.LIBRE:
+var estado_fisico : EstadoFisico = EstadoFisico.CAIDA:
 	set(value):
 		estado_fisico = value
-		actualizar_estado_fisico()
+		_actualizar_estado_fisico()
 		
 		
 		
@@ -24,7 +25,7 @@ var carpeta_abierta: bool = false
 var cerrando := false
 var esta_guardada : bool = false
 var being_held = false
-var camera_ref = null
+var player_ref = null
 var original_gravity := 1
 var caja_padre = null
 var slot_actual = null
@@ -36,6 +37,8 @@ var hojas_reacomodadas := false
 @onready var punto_guardado = $posicion_giro
 var base_rot_tapa_1 : Vector3
 var base_rot_tapa_2 : Vector3
+
+@onready var debug_slot := $DEBUG_SLOT 
 
 
 
@@ -54,10 +57,10 @@ var apertura_objetivo : float = 0.0
 @onready var anim_player = $modelo/AnimationPlayer
 @onready var ui_panel = $ui_textos
 
-@onready var documento_titulo = $titulo_documento
-@onready var documento_texto = $modelo/tapa_1/tapa_2/texto_documento
+@onready var documento_texto = $titulo_documento
+@onready var documento_titulo = $modelo/tapa_1/tapa_2/texto_documento
 
-@onready var punto_spawn_A = $modelo/base/PUNTO_A
+@onready var punto_spawn_A = $PUNTO_A
 @onready var punto_secundario_A = $modelo/tapa_1/tapa_2/PUNTO_A
 
 #var hojas_apiladas : Array = []
@@ -69,8 +72,12 @@ var offset_apilamiento : float = 0.01
 var grosor_actual : float  = 0.0
 # --- FUNCIONES DE EJECUCION --- 
 func _ready():
+	linear_damp = 2.0
+	angular_damp = 4.0
+	
 	add_to_group("carpetas")
 	add_to_group("agarrable")
+	add_to_group("arrastrable")
 	crear_debug_basis()
 	base_rot_tapa_1 = tapa_1.rotation
 	base_rot_tapa_2 = tapa_2.rotation
@@ -80,7 +87,7 @@ func _physics_process(delta):
 	grosor_actual = ( hojas_principales.size() + hojas_secundarias.size() ) * 0.01
 	punto_guardado.position.x = grosor_actual
 	
-	if being_held and camera_ref:
+	if being_held and player_ref:
 		linear_velocity = Vector3.ZERO
 		angular_velocity = Vector3.ZERO
 	
@@ -92,10 +99,34 @@ func _physics_process(delta):
 				hojas_reacomodadas = true
 	else:
 		hojas_reacomodadas = false
+	actualizar_etiqueta()
 # --- FUNCIONES DE EJECUCION --- 
 
+func actualizar_etiqueta():
+	var estadisticas = ControllerRevision.revisar_hojas(hojas_principales)
+	var mayor = ControllerRevision.consultar_mayor_coincidencia(estadisticas)
+	if mayor.is_empty():
+		documento_titulo.text = "carpeta vacía"
+		return
+	match mayor.categoria:
+		"nombre":
+			documento_titulo.text = "Archivo de " + str(mayor.valor)
+		"tipo":
+			documento_titulo.text = "Archivo " + str(mayor.valor)
+		"fecha":
+			documento_titulo.text = "Documentos " + str(mayor.valor)
+		"cargo":
+			documento_titulo.text = "Departamento " + str(mayor.valor)
+
+
+
+
 # --- FUNCIONES DE ESTADO ---
-func actualizar_estado_fisico():
+func set_estado_fisico(nuevo_estado: EstadoFisico):
+	estado_fisico = nuevo_estado
+	_actualizar_estado_fisico()
+
+func _actualizar_estado_fisico():
 	match estado_fisico:
 
 		EstadoFisico.GUARDADO:
@@ -106,8 +137,9 @@ func actualizar_estado_fisico():
 			linear_velocity = Vector3.ZERO
 			angular_velocity = Vector3.ZERO
 			
-		EstadoFisico.SOSTENIDO:
+		EstadoFisico.EN_MANO:
 			freeze = true
+			collision.disabled = true
 			freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
 			gravity_scale = 0
 			collision_layer = 0
@@ -115,8 +147,17 @@ func actualizar_estado_fisico():
 			linear_velocity = Vector3.ZERO
 			angular_velocity = Vector3.ZERO
 			
-		EstadoFisico.LIBRE:
+		EstadoFisico.CAIDA:
 			freeze = false
+			freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
+			collision.disabled = false
+			gravity_scale = original_gravity
+			collision_layer = 1
+			collision_mask = 1
+
+		EstadoFisico.ARRASTRANDO:
+			freeze = false
+			freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
 			gravity_scale = original_gravity
 			collision_layer = 1
 			collision_mask = 1
@@ -134,7 +175,7 @@ func sacar_carpeta():
 func guardar_carpeta():
 	esta_guardada = true
 	being_held = false
-	camera_ref = null
+	player_ref = null
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
 	freeze = true
@@ -159,7 +200,7 @@ func cerrar_carpeta():
 
 		var hoja = hojas_secundarias.pop_back()
 
-		hojas_principales.push_front(hoja)
+		hojas_principales.push_back(hoja)
 
 	actualizar_posiciones_hojas()
 
@@ -227,7 +268,6 @@ func _aplicar_tapa_segmentada():
 	# -----------------------------
 
 	var grosor = clamp( grosor_actual , 0.0 , 1.0 )
-	
 	var inicio_doblez = calcular_angulo_doblez()
 	if angulo_total >= inicio_doblez:
 		tapa_1.rotation = ( base_rot_tapa_1 + Vector3(0, -angulo_total, 0) )
@@ -237,129 +277,63 @@ func _aplicar_tapa_segmentada():
 		tapa_2.rotation = ( base_rot_tapa_2 + Vector3(0, inicio_doblez, 0) )
 	
 func calcular_angulo_doblez():
-
 	if grosor_actual <= 0.0:
 		return 0.0
 	var altura = grosor_actual
 	# distancia horizontal desde pivot
 	var largo_segmento = 0.05
-	
 	var angulo = atan2( altura , largo_segmento )
-	
 	return angulo
 # --- FUNCIONES CONTROL CARPETA ---
 
-# --- FUNCIONES MOSTRADO DOCUMENTOS ---
-func actualizar_vista_documento():
 
-	if hojas_principales.is_empty():
-
-		documento_texto.text = "Carpeta vacía"
-		documento_titulo.text = "Sin documentos"
-		return
-
-	var doc = hojas_principales[0]
-
-	#documento_titulo.text = doc.nombre_documento
-	#documento_texto.text = doc.texto_documento
-
-func anterior_documento():
-
-	if hojas_secundarias.is_empty():
-		return
-	# SACAR DEL FRENTE SECUNDARIO
-	var hoja = hojas_secundarias.pop_front()
-	# VOLVER AL FRENTE PRINCIPAL
-	hojas_principales.push_front(hoja)
-
-	actualizar_vista_documento()
-	actualizar_posiciones_hojas()
-
-func siguiente_documento():
-	if hojas_principales.is_empty():
-		return
-	# SACAR DEL FRENTE PRINCIPAL
-	var hoja = hojas_principales.pop_front()
-	# PONER AL FRENTE SECUNDARIO
-	hojas_secundarias.push_front(hoja)
-
-	actualizar_vista_documento()
-	actualizar_posiciones_hojas()
-# --- FUNCIONES MOSTRADO DOCUMENTOS ---
-
-# --- FUNCIONES CONTROL DOCUMENTOS ---
-func posicionar_hoja( hoja, slot: Marker3D, indice: int, direccion_apilado: Vector3):
-	var offset = direccion_apilado * ( indice * offset_apilamiento )
-	# COPIAR ROTACION
-	#hoja.global_rotation = slot.global_rotation
-	
-	if hoja.get_parent() != slot:
-		var old_rotation = hoja.global_rotation
-		if hoja.get_parent():
-			hoja.get_parent().remove_child(hoja)
-		slot.add_child(hoja)
-		hoja.global_rotation = old_rotation
-		
+# --- FUNCIONES GESTION LOGICA HOJAS ---
+func posicionar_hoja( hoja , indice: int ):
+	var offset = Vector3.DOWN * ( indice * offset_apilamiento )
+	hoja.transform = Transform3D.IDENTITY
 	hoja.position = offset
-	# AHORA POSICION LOCAL
-	hoja.rotation = Vector3.ZERO
+
+func mover_hoja_a_slot(hoja, slot):
+	if hoja.get_parent() == slot:
+		return
+	var global = hoja.global_transform
+	if hoja.get_parent():
+		hoja.get_parent().remove_child(hoja)
+	slot.add_child(hoja)
+	hoja.global_transform = global
 
 func reacomodar_hojas_cerradas():
-	var dir_principal = -punto_spawn_A.global_basis.x
+	#var dir_principal = -punto_spawn_A.global_basis.x
+	var dir_principal = Vector3.DOWN
+	var dir_secundario = Vector3.RIGHT
 	var todas = []
 	todas.append_array(hojas_secundarias)
 	todas.append_array(hojas_principales)
 	for i in range(todas.size()):
 		var hoja = todas[i]
-		posicionar_hoja(
-			hoja,
-			punto_spawn_A,
-			i,
-			dir_principal
-		)
+		posicionar_hoja( hoja, i )
 
 func actualizar_posiciones_hojas():
-
-	var dir_principal = -punto_spawn_A.global_basis.x
-	var dir_secundario = punto_secundario_A.global_basis.x
-
-	# -----------------------------
-	# PRINCIPALES
-	# -----------------------------
+	var dir_principal = Vector3.DOWN
+	var dir_secundario = Vector3.LEFT
+	
 	for i in range(hojas_principales.size()):
-
 		var hoja = hojas_principales[i]
+		posicionar_hoja( hoja , i )
 
-		posicionar_hoja(
-			hoja,
-			punto_spawn_A,
-			i,
-			dir_principal
-		)
-
-	# -----------------------------
-	# SECUNDARIAS
-	# -----------------------------
 	for i in range(hojas_secundarias.size()):
-
 		var hoja = hojas_secundarias[i]
-
-		posicionar_hoja(
-			hoja,
-			punto_secundario_A,
-			i,
-			dir_secundario
-		)
+		posicionar_hoja( hoja , i )
 
 func sacar_hoja_actual():
 	if hojas_principales.is_empty():
 		return null
-	var hoja = hojas_principales.pop_front()
+	var hoja = hojas_principales.pop_back()
 	hoja.estado_fisico = hoja.EstadoFisico.EN_MANO
 	hoja.carpeta_padre = null
-	var old_rotation = hoja.global_rotation
+	var old_rotation = hoja.global_transform
 	hoja.reparent(get_tree().current_scene)
-	hoja.global_rotation = old_rotation
+	hoja.global_transform = old_rotation
 	actualizar_posiciones_hojas()
 	actualizar_vista_documento()
 	return hoja
@@ -373,10 +347,95 @@ func agregar_hoja(hoja):
 	hojas_principales.append(hoja)
 	actualizar_posiciones_hojas()
 	actualizar_vista_documento()
-# --- FUNCIONES CONTROL DOCUMENTOS ---
 
+func actualizar_grosor():
+	pass
+# --- FUNCIONES GESTION LOGICA HOJAS ---
+
+
+
+# --- FUNCIONES GESTION VISUAL HOJAS ---
+func sincronizar_visual():
+	# MOVIMIENTO HOJAS PRINCIPALES
+	for i in range(hojas_principales.size()):
+		var hoja = hojas_principales[i]
+		mover_hoja_a_slot( hoja, punto_spawn_A )
+		posicionar_hoja( hoja, i )
+
+	# MOVIMIENTO HOJAS SECUNDARIAS
+	for i in range(hojas_secundarias.size()):
+		var hoja = hojas_secundarias[i]
+		mover_hoja_a_slot( hoja, punto_secundario_A )
+		posicionar_hoja( hoja, i )
+		
+	actualizar_vista_documento()
+	actualizar_grosor()
+
+func actualizar_vista_documento():
+	if hojas_principales.is_empty():
+		documento_texto.text = "Carpeta vacía"
+		documento_titulo.text = "Sin documentos"
+		return
+	#var doc = hojas_principales.back()
+
+func anterior_documento():
+	if hojas_secundarias.is_empty():
+		return
+	var hoja = hojas_secundarias.pop_back()
+	hojas_principales.push_back(hoja)
+	sincronizar_visual()
+
+func siguiente_documento():
+	if hojas_principales.is_empty():
+		return
+	var hoja = hojas_principales.pop_back()
+	hojas_secundarias.push_back(hoja)
+	sincronizar_visual()
+# --- FUNCIONES GESTION VISUAL HOJAS ---
+
+func on_click(player):
+	if being_held:
+		return
+	player.held_folder = self
+	player.holding_folder = true
+	
+	being_held = true
+	player_ref = player
+	set_estado_fisico(EstadoFisico.EN_MANO)
+
+func empezar_arrastre(player):
+	player_ref = player
+	set_estado_fisico(EstadoFisico.ARRASTRANDO)
+
+func terminar_arrastre(player):
+	player_ref = null
+	#linear_velocity = Vector3.ZERO
+	set_estado_fisico(EstadoFisico.CAIDA)
+
+func grab(camera):
+	being_held = true
+	player_ref = camera
+	set_estado_fisico(EstadoFisico.EN_MANO)
+
+func release():
+	being_held = false
+	player_ref = null
+	gravity_scale = original_gravity
+	set_estado_fisico(EstadoFisico.CAIDA)
+
+func arrastrar(target: Vector3):
+	var dir = target - global_position
+	linear_velocity = dir * 18.0
+	angular_velocity *= 0.85
+
+
+
+
+
+
+
+# --- FUNCIONES DEBUGG ---
 func crear_debug_basis():
-
 	var x = MeshInstance3D.new()
 	var y = MeshInstance3D.new()
 	var z = MeshInstance3D.new()
@@ -385,15 +444,14 @@ func crear_debug_basis():
 	mesh.top_radius = 0.01
 	mesh.bottom_radius = 0.01
 	mesh.height = 0.5
-
+	
 	x.mesh = mesh
 	y.mesh = mesh
 	z.mesh = mesh
-
+	
 	add_child(x)
 	add_child(y)
 	add_child(z)
-
 	x.position = Vector3.RIGHT * 0.5
 	y.position = Vector3.UP * 0.5
 	z.position = Vector3.BACK * 0.5
