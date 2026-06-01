@@ -1,47 +1,54 @@
 extends Node
 
+const TIPOS_DOCUMENTO = {
+	"CONTRATO": preload("res://tres/Tipo_Documento/contrato.tres"),
+	"SALUD": preload("res://tres/Tipo_Documento/salud.tres"),
+	"HORARIO": preload("res://tres/Tipo_Documento/horario.tres"),
+	"REVISION": preload("res://tres/Tipo_Documento/revision.tres")
+}
+
+
 var trabajadores : Array[Trabajador] = []
 
 var documentos_por_cargo = {
 	"ASEO" : [
-		Documento.TipoDocumento.CONTRATO,
-		#Documento.TipoDocumento.CERTIFICADO_QUIMICOS,
-		Documento.TipoDocumento.SALUD,
-		Documento.TipoDocumento.HORARIO
+		TIPOS_DOCUMENTO.CONTRATO,
+		TIPOS_DOCUMENTO.SALUD,
+		TIPOS_DOCUMENTO.HORARIO
 		],
 	"ADMINISTRATIVO" : [
-		Documento.TipoDocumento.CONTRATO,
+		TIPOS_DOCUMENTO.CONTRATO,
 		#Documento.TipoDocumento.CONFIDENCIALIDAD,
 		#Documento.TipoDocumento.ACCESO_SISTEMAS,
 		#Documento.TipoDocumento.EVALUACION,
 		],
 	"CONTABLE" : [
-		Documento.TipoDocumento.CONTRATO,
+		TIPOS_DOCUMENTO.CONTRATO,
 		#Documento.TipoDocumento.TITULO,
 		#Documento.TipoDocumento.REGISTRO_FISCAL,
 		#Documento.TipoDocumento.DECLARACION_BIENES,
 		#Documento.TipoDocumento.SEGURO_ERROR
 		],
 	"ABOGADO" : [
-		Documento.TipoDocumento.CONTRATO,
+		TIPOS_DOCUMENTO.CONTRATO,
 		#Documento.TipoDocumento.TITULO,
 		#Documento.TipoDocumento.ANTECEDENTES,
 		#Documento.TipoDocumento.AUTORIZACION_REPRESENTACION,
 		],
 	"LOGISTICA" : [
-		Documento.TipoDocumento.CONTRATO,
+		TIPOS_DOCUMENTO.CONTRATO,
 		#Documento.TipoDocumento.CARNET_CARGAS,
 		#Documento.TipoDocumento.LICENCIA_MONTACARGAS,
 		#Documento.TipoDocumento.INVENTARIO,
 		],
 	"TECNICO" : [
-		Documento.TipoDocumento.CONTRATO,
+		TIPOS_DOCUMENTO.CONTRATO,
 		#Documento.TipoDocumento.TITULO,
 		#Documento.TipoDocumento.NO_COMPETENCIA,
 		#Documento.TipoDocumento.BITACORA
 		],
 	"CEO": [
-		Documento.TipoDocumento.CONTRATO,
+		TIPOS_DOCUMENTO.CONTRATO,
 		#Documento.TipoDocumento.ACTA_CONSTITUCION,
 		#Documento.TipoDocumento.PODERES,
 		#Documento.TipoDocumento.DECLARACION_PATRIMONIO,
@@ -61,7 +68,7 @@ func cargar_trabajadores_iniciales():
 		Trabajador.nuevo(3, "Lucía Fernández", "ABOGADO"),
 	]
 
-func generar_documento(tipo: Documento.TipoDocumento, trabajador: Trabajador) -> Documento:
+func generar_documento(tipo: TipoDocumento, trabajador: Trabajador) -> Documento:
 	var doc = Documento.new()
 	doc.tipo = tipo
 	doc.owner_id = 1

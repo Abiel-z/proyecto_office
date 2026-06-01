@@ -1,14 +1,18 @@
 extends Node
 
 func generar_bbcode_documento(doc: Documento) -> String:
-	match doc.tipo:
-		Documento.TipoDocumento.REVISION:
+	
+	if doc.tipo == null:
+		return "[color=red]SIN TIPO DOCUMENTO[/color]"
+	
+	match doc.tipo.id:
+		"REVISION":
 			return generar_revision(doc)
-		Documento.TipoDocumento.CONTRATO:
+		"CONTRATO":
 			return generar_contrato(doc)
-		Documento.TipoDocumento.HORARIO:
+		"HORARIO":
 			return generar_horario(doc)
-		Documento.TipoDocumento.SALUD:
+		"SALUD":
 			return generar_salud(doc)
 			
 	return "[color=red]DOCUMENTO INVALIDO[/color]"
@@ -17,7 +21,10 @@ func generar_revision(doc: Documento) -> String:
 
 	var data = doc.metadata
 
-	var mejor = data.mejor_coincidencia
+	print(data)
+	print(data.keys())
+	
+	var mejor = data["mejor_coincidencia"]
 
 	var txt := ""
 

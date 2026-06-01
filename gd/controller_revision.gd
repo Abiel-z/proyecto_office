@@ -24,8 +24,17 @@ func revisar_hojas(hojas:Array):
 		var doc = hoja.documento
 		sumar_valor( estadisticas["nombre"], doc.nombre )
 		sumar_valor( estadisticas["cargo"], doc.cargo )
-		sumar_valor( estadisticas["tipo"], doc.tipo )
+		sumar_valor( estadisticas["tipo"], doc.tipo.id )
 		sumar_valor( estadisticas["fecha"], doc.fecha )
+		
+		print("DOC:", doc)
+		print("nombre:", doc.nombre)
+		print("cargo:", doc.cargo)
+		print("tipo:", doc.tipo)
+		print("fecha:", doc.fecha)
+		
+	print("ESTADISTICAS FINALES:")
+	print(estadisticas)
 	return estadisticas
 	
 func sumar_valor(dic:Dictionary, valor):
@@ -73,7 +82,16 @@ func calcular_puntaje( hojas:Array ) -> Dictionary:
 	var total = int(
 		puntaje_base * multiplicador
 	)
-
+	var resultado := {
+		"estadisticas": estadisticas,
+		"mejor_coincidencia": mejor,
+		"puntaje_base": puntaje_base,
+		"multiplicador": multiplicador,
+		"puntaje_total": total,
+		"bonos": bonos
+	}
+	print(resultado)
+	
 	return {
 		"estadisticas": estadisticas,
 		"mejor_coincidencia": mejor,

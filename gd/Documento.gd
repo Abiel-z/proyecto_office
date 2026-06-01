@@ -1,14 +1,7 @@
 extends Resource
 class_name Documento
 
-enum TipoDocumento {
-	REVISION,
-	CONTRATO,
-	HORARIO,
-	SALUD
-}
-
-@export var tipo = TipoDocumento 
+@export var tipo : TipoDocumento 
 @export var nombre : String
 @export var cargo : String
 @export var fecha : String

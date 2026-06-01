@@ -69,7 +69,7 @@ func obtener_hoja(documento):
 		var hoja_existente = hojas_creadas[id]
 		if is_instance_valid(hoja_existente):
 			return hoja_existente
-	var hoja = crear_hoja(documento)
+	var hoja =  crear_hoja(documento)
 	hojas_creadas[id] = hoja
 	return hoja
 
@@ -96,6 +96,6 @@ func crear_carpeta_trabajador(trabajador):
 			datos_doc.id,
 			datos_doc
 		)
-		var hoja = obtener_hoja(documento)
+		var hoja =  obtener_hoja(documento)
 		carpeta.agregar_hoja(hoja)
 	return carpeta

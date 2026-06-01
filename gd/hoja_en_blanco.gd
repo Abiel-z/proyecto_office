@@ -17,6 +17,8 @@ enum EstadoDocumento {
 	RECHAZADO
 }
 
+const SHADER_HOJA = preload("res://shaders/shader_hoja.gdshader")
+
 var errores := {}
 var estado_fisico : EstadoFisico = EstadoFisico.GUARDADA
 var estado_documento : EstadoDocumento = EstadoDocumento.NORMAL
@@ -52,15 +54,16 @@ func _ready():
 	add_to_group("agarrable")
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	viewport.size = Vector2(370 , 512)
-	viewport.transparent_bg = false
+	viewport.transparent_bg = true
 	viewport.disable_3d = true
+	viewport.transparent_bg = false
 	ui_root.scale = Vector2.ONE
 	sello.visible = false
 	revisar_guardado()
 	_actualizar_estado_fisico()
 
 func _physics_process(delta):
-	actualizar_flecha_debug()
+	#actualizar_flecha_debug()
 	corregir_altura()
 
 func agregar_error(id_error : String):
@@ -82,18 +85,47 @@ func set_documento(doc: Documento):
 	actualizar_visual()
 	aplicar_textura()
 
+
 func aplicar_textura():
+
 	await get_tree().process_frame
-	#await RenderingServer.frame_post_draw
-	var texture = viewport.get_texture()
-	
-	var material = StandardMaterial3D.new()
-	
-	material.albedo_texture = texture
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	material.cull_mode = BaseMaterial3D.CULL_FRONT
-	
-	modelo_hoja.material_override = material
+
+	var viewport_texture = viewport.get_texture()
+
+	var shader_material = ShaderMaterial.new()
+
+	shader_material.shader = SHADER_HOJA
+
+	shader_material.set_shader_parameter(
+		"documento_texture",
+		viewport_texture
+	)
+
+	shader_material.set_shader_parameter(
+		"mascara_borde",
+		documento.tipo.mascara_borde
+	)
+
+	modelo_hoja.material_override = shader_material
+
+#func aplicar_textura():
+	#await get_tree().process_frame
+	#
+	#var viewport_texture = viewport.get_texture()
+	#var material = StandardMaterial3D.new()
+	#var shader_material = ShaderMaterial.new()
+	#
+	#shader_material.shader = SHADER_HOJA
+	#shader_material.set_shader_parameter("documento_texture",viewport_texture)
+	#shader_material.set_shader_parameter("mascara_borde", documento.tipo.mascara_borde)
+	#modelo_hoja.material_override = shader_material
+	#material.albedo_texture = viewport_texture
+	#
+	#material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	#material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	#material.cull_mode = BaseMaterial3D.CULL_FRONT
+	#modelo_hoja.material_override = material
+	#
 
 func actualizar_visual():
 	if not documento:

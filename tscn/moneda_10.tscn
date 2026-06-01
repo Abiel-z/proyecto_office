@@ -8,6 +8,7 @@ height = 0.0760726
 radius = 0.245902
 
 [node name="modena_10" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.26309e-05, 0.00155008, -0.000500858)
 script = ExtResource("1_v682i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

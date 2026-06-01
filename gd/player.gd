@@ -43,6 +43,12 @@ var objeto_arrastrado_offset : Vector3
 var distancia_arrastre := 1.0
 var fuerza_arrastre := 5.0
 
+var active_group = null
+var cargando_lanzamiento := false
+var carga_lanzamiento := 0.0
+var carga_max := 1.5
+var fuerza_max := 25.0
+
 var en_ui_carpeta := false
 var agachado := false
 var mouse_delta := Vector2.ZERO
@@ -65,6 +71,8 @@ var textura_punto = preload("res://datos blender/texturas/puntero_normal.png")
 var textura_agarre = preload("res://datos blender/texturas/puntero_agarre.png")
 var textura_arrastre = preload("res://datos blender/texturas/puntero_arrastre.png")
 
+var raycast_result = null
+
 var interaccion = {
 	"objeto" : null,
 	"tiempo" : 0.0,
@@ -76,7 +84,23 @@ var interaccion = {
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	crear_puntero()
-	crear_debug_punto()
+	#crear_debug_punto()
+
+func set_result(result):
+	raycast_result = result
+
+func get_result():
+	return raycast_result
+
+func clean_result():
+	raycast_result = null
+
+func get_clicked_shape():
+	if raycast_result == null:
+		return null
+	var collider = raycast_result.collider
+	var owner_id = collider.shape_find_owner(raycast_result.shape)
+	return collider.shape_owner_get_owner(owner_id)
 
 func crear_puntero():
 	if puntero != null:
@@ -134,7 +158,7 @@ func _input(event):
 	
 	
 	
-	# --- CLICK IZQUIERDO ---
+	# --- PRESIONAR CLICK IZQUIERDO ---
 	if event.is_action_pressed("click_izquierdo"):
 		
 		# --- AGARRAR HOJA DESDE CARPETA ---
@@ -147,81 +171,14 @@ func _input(event):
 		
 		var result = raycast_desde_mouse()
 		if result:
+			set_result(result)
 			interaccion.objeto = result.collider
 			interaccion.tiempo = 0.0
 			interaccion.arrastrando = false
 			interaccion.punto_local = ( result.collider.to_local(result.position) )
-		
-		#SISTEMA ACTUAL
-		#var result = raycast_desde_mouse()
-		## --- DEJAR HOJA EN EL SUELO ---
-		#if held_folder == null and tiene_hojas() and result:
-			#if result.collider.is_in_group("superficie"):
-				#colocar_hoja_en_superficie()
-				#return
-			#
-		#if result:
-			#var collider = result.collider
-			#if collider.is_in_group("arrastrable"):
-				#objeto_candidato = collider
-				#tiempo_agarre = 0.0
-				##var punto_local = collider.to_local(result.position)
-				##objeto_arrastrado_offset = punto_local
-				#
-			#if collider.is_in_group("botones"):
-				#print("boton_detectado")
-				#collider.interactuar()
-			#if collider.is_in_group("mango"):
-				#mango_agarrado = collider
-				#return
-			#
-			## --- AGARRAR TIMBRE DEL SUELO ---
-			#if collider.is_in_group("timbres") and not holding_stamp:
-				#held_stamp = collider
-				#holding_stamp = true
-				#held_stamp.grab(camera)
-				#return
-			## --- AGARRAR TIMBRE DEL SUELO ---
-#
-			## --- AGARRAR TIMBRE DEL SUELO ---
-			#if collider.is_in_group("monedas") and not holding_stamp:
-				#held_monedas.append(collider)
-				#holding_monedas = true
-				#held_monedas[0].grab(camera)
-				#return
-			## --- AGARRAR TIMBRE DEL SUELO ---
-#
-#
-			## --- AGARRAR HOJA DESDE SUELO ---
-			#if collider.is_in_group("hojas") and held_sheets.size() < hojas_maximas:
-				#held_sheets.append(collider)
-				#collider.grab(camera)
-				#return
-			## --- AGARRAR HOJA DESDE EL SUELO ---
-#
-			## --- AGARRAR CARPETA ---
-			#if collider.is_in_group("carpetas") and not holding_folder:
-				#if collider.caja_padre != null:
-					#collider.caja_padre.quitar_carpeta(collider)
-				#held_folder = collider
-				#holding_folder = true
-				#held_folder.estado_fisico = held_folder.EstadoFisico.SOSTENIDO
-				#held_folder.being_held = true
-				#held_folder.camera_ref = camera
-				#return
-			#
-			#if collider.is_in_group("cajas") and holding_folder:
-				#var agregado = await collider.agregar_carpeta(held_folder)
-				#if agregado:
-					#holding_folder = false
-					#held_folder = null
-				#return
-#
-			## --- AGARRAR CAJA ---
-			#if collider.is_in_group("cajas"):
-				#collider.grab(camera)
+	# --- PRESIONAR CLICK IZQUIERDO ---
 
-	# --- SOLTAR CLICK ---
+	# --- SOLTAR CLICK IZQUIERDO ---
 	if event.is_action_released("click_izquierdo"):
 		if interaccion.objeto != null:
 			if interaccion.arrastrando:
@@ -234,8 +191,10 @@ func _input(event):
 		interaccion.objeto = null
 		interaccion.tiempo = 0.0
 		interaccion.arrastrando = false
-	# --- SOLTAR CLICK ---
+		clean_result()
+	# --- SOLTAR CLICK IZQUIERDO ---
 
+	# --- PRESIONAR CLICK DERECHO ---
 	if event.is_action_pressed("click_derecho"):
 		if holding_folder and tiene_hojas():
 					var hoja = held_sheets.pop_back()
@@ -245,31 +204,48 @@ func _input(event):
 					hoja = null
 					return
 
-	# --- SOLTAR OBJETOS ("Q") ---
+	 #--- SOLTAR OBJETOS ("Q") ---
 	if event.is_action_pressed("soltar"):
-		if holding_folder and held_folder != null:
-			held_folder.release()
-			holding_folder = false
-			held_folder = null
+		print("Q PRESIONADA")
+		cargando_lanzamiento = true
+		carga_lanzamiento = 0.0
+		active_group = get_grupo_activo() 
+	
+	if event.is_action_released("soltar"):
+		print("Q SOLTADA")
+		cargando_lanzamiento = false
+		if active_group == null:
 			return
-		
-		if holding_stamp and held_stamp != null:
-			held_stamp.release()
-			holding_stamp = false
-			held_stamp = null
-			return
-		
-		if tiene_hojas():
-			var hoja = hoja_actual()
-			hoja.release()
-			held_sheets.erase(hoja)
-			return
-		
-		if held_monedas.size() >= 1:
-			for i in held_monedas:
-				held_monedas[0].release()
-				held_monedas.erase(i)
-				return
+		if carga_lanzamiento < 0.3:
+			soltar_uno(active_group)
+		else:
+			lanzar_todo(active_group, carga_lanzamiento)
+		active_group = null
+	#if event.is_action_pressed("soltar"):
+		#
+		#if holding_folder and held_folder != null:
+			#held_folder.release()
+			#holding_folder = false
+			#held_folder = null
+			#return
+		#
+		#if holding_stamp and held_stamp != null:
+			#held_stamp.release()
+			#holding_stamp = false
+			#held_stamp = null
+			#return
+		#
+		#if tiene_hojas():
+			#var hoja = hoja_actual()
+			#hoja.release()
+			#held_sheets.erase(hoja)
+			#return
+		#
+		#if held_monedas.size() >= 1:
+			#for i in held_monedas:
+				#held_monedas[0].release()
+				#held_monedas.erase(i)
+				#return
  
 	# --- ABRIR CARPETA ---
 	if event.is_action_pressed("interactuar"):
@@ -315,24 +291,33 @@ func _input(event):
 			#held_stamp.animar_timbrado()
 		# --- TIMBRAR HOJAS ---
 
-#func iniciar_agarre():
-	#var result = raycast_desde_mouse()
-	#if not result:
-		#return
-	#var collider = result.collider
-	#if collider.is_in_group("cajas"):
-		#objeto_candidato = collider
-		#held_box = collider
-		#intentando_agarre = true
-		#tiempo_agarre = 0.0
-#
-#func cancelar_agarre():
-	#intentando_agarre = false
-	#tiempo_agarre = 0.0
-	#if dragged_object != null:
-		#held_box.stop_drag()
-		#dragged_object = null
-	#objeto_candidato = null
+func get_grupo_activo():
+	if held_stamp:
+		return [held_stamp]
+	if not held_monedas.is_empty():
+		return held_monedas
+	if held_folder:
+		return [held_folder]
+	if not held_sheets.is_empty():
+		return held_sheets
+	return null
+
+func soltar_uno(grupo):
+	print("SOLTANDO UNA")
+	if grupo.is_empty():
+		return
+	var obj = grupo.pop_back()
+	obj.release()
+
+func lanzar_todo(grupo, time):
+	var t = time / carga_max
+	var fuerza = lerp(5.0, fuerza_max, t)
+	var dir = -camera.global_basis.z
+	for obj in grupo:
+		if obj.has_method("lanzar"):
+			obj.lanzar(dir, fuerza)
+	grupo.clear()
+
 
 func anterior_documento():
 	if held_sheets.is_empty():
@@ -394,15 +379,6 @@ func raycast_desde_mouse():
 	var query = PhysicsRayQueryParameters3D.create(origin, end)
 	query.collision_mask = 1
 	var result = space_state.intersect_ray(query)
-	if result:
-		debug_punto.visible = true
-		debug_punto.global_position = result.position
-		debug_punto.look_at(
-		result.position + result.normal,
-		Vector3.UP
-		)
-	else:
-		debug_punto.visible = false
 	return result
 
 func actualizar_puntero():
@@ -434,10 +410,16 @@ func _physics_process(delta):
 	var collision = raycast_desde_mouse()
 	if collision:
 		var collider = collision.collider
-		print(collider)
+		#print(collider)
 	actualizar_puntero()
 	actualizar_arrastre_hold_point()
 	
+	if cargando_lanzamiento:
+		carga_lanzamiento += delta
+		print(carga_lanzamiento)
+		carga_lanzamiento = min(carga_lanzamiento, carga_max)
+		print(carga_lanzamiento)
+		
 	if interaccion.arrastrando:
 		if interaccion.objeto != null:
 			var target = arrastre_hold_point.global_position
@@ -472,38 +454,6 @@ func _physics_process(delta):
 				if interaccion.objeto.has_method("empezar_arrastre"):
 					interaccion.objeto.empezar_arrastre(self)
 					
-	
-	#if objeto_candidato != null:
-		#tiempo_agarre += delta
-		#if tiempo_agarre >= tiempo_requerido:
-			#modo_arrastre = true
-			#objeto_arrastrado = objeto_candidato
-			#var result = raycast_desde_mouse()
-			#if result:
-				#objeto_arrastrado_offset = (objeto_arrastrado.to_local(result.position))
-		#objeto_candidato = null
-		#modo_arrastre = null
-		
-	## AGARRE CAJA
-	#if intentando_agarre and objeto_candidato != null:
-		#tiempo_agarre += delta
-		#if tiempo_agarre >= tiempo_requerido:
-			#var result = raycast_desde_mouse()
-			#if result and result.collider == objeto_candidato:
-				#if rotando_objeto:
-					#held_box.rotate_object_local(
-						#Vector3.UP,
-						#-mouse_delta.y * 0.001
-					#)
-					#held_box.rotate_object_local(
-						#Vector3.RIGHT,
-						#-mouse_delta.x * 0.001
-					#)
-				#dragged_object = objeto_candidato
-				#holding_box = true
-				#dragged_object.start_drag(drag_hold_point)
-			#intentando_agarre = false
-	
 	# MOVER HOJA
 	for i in range(held_sheets.size()):
 		var hoja = held_sheets[i]

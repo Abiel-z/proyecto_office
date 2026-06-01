@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TipoDocumento" load_steps=3 format=3 uid="uid://lke74wm2e5k3"]
+
+[ext_resource type="Texture2D" uid="uid://05p0sui80bdw" path="res://aseprite/margenes_hojas/mascara_fax.png" id="1_l36cb"]
+[ext_resource type="Script" path="res://gd/TipoDocumento.gd" id="2_lfy0p"]
+
+[resource]
+script = ExtResource("2_lfy0p")
+id = "REVISION"
+mascara_borde = ExtResource("1_l36cb")
+color_papel = Color(1, 1, 0.741176, 1)
+tipo_timbre = ""
+posiciones_timbres = Array[Vector2]([])
+posiciones_firmas = Array[Vector2]([])
+cantidad_max_timbres = 3

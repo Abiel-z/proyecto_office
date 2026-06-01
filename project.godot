@@ -23,6 +23,12 @@ DatabaseSistema="*res://gd/database_sistema.gd"
 RenderDocumentos="*res://gd/render_documentos.gd"
 ControllerRevision="*res://gd/controller_revision.gd"
 ControllerEconomia="*res://gd/controller_economia.gd"
+ControllerSpawnerTienda="*res://gd/controller_spawner_tienda.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=960
 
 [input]
 

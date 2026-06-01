@@ -78,7 +78,7 @@ func _ready():
 	add_to_group("carpetas")
 	add_to_group("agarrable")
 	add_to_group("arrastrable")
-	crear_debug_basis()
+	#crear_debug_basis()
 	base_rot_tapa_1 = tapa_1.rotation
 	base_rot_tapa_2 = tapa_2.rotation
 	actualizar_apertura_visual()
@@ -139,19 +139,19 @@ func _actualizar_estado_fisico():
 			
 		EstadoFisico.EN_MANO:
 			freeze = true
-			collision.disabled = true
-			freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
 			gravity_scale = 0
-			collision_layer = 0
-			collision_mask = 0
+			collision.disabled = true
 			linear_velocity = Vector3.ZERO
 			angular_velocity = Vector3.ZERO
+			freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+			collision_layer = 0
+			collision_mask = 0
 			
 		EstadoFisico.CAIDA:
+			gravity_scale = original_gravity
+			collision.disabled = false
 			freeze = false
 			freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
-			collision.disabled = false
-			gravity_scale = original_gravity
 			collision_layer = 1
 			collision_mask = 1
 
@@ -396,6 +396,8 @@ func siguiente_documento():
 func on_click(player):
 	if being_held:
 		return
+	if player.holding_folder:
+		return
 	player.held_folder = self
 	player.holding_folder = true
 	
@@ -413,12 +415,17 @@ func terminar_arrastre(player):
 	set_estado_fisico(EstadoFisico.CAIDA)
 
 func grab(camera):
+	if player_ref.held_folder != null:
+		return
 	being_held = true
 	player_ref = camera
 	set_estado_fisico(EstadoFisico.EN_MANO)
 
 func release():
 	being_held = false
+	if player_ref:
+		player_ref.held_folder = null
+		player_ref.holding_folder = false
 	player_ref = null
 	gravity_scale = original_gravity
 	set_estado_fisico(EstadoFisico.CAIDA)
@@ -428,11 +435,10 @@ func arrastrar(target: Vector3):
 	linear_velocity = dir * 18.0
 	angular_velocity *= 0.85
 
-
-
-
-
-
+func lanzar(dir: Vector3, fuerza : float):
+	release()
+	dir.y *= 0.1
+	linear_velocity = dir * fuerza
 
 # --- FUNCIONES DEBUGG ---
 func crear_debug_basis():

@@ -11,12 +11,14 @@ var estado_fisico = EstadoFisico.CAIDA
 var player_ref = null
 var multiplicador_por_arrastre := 1.0
 var original_gravity = 1.0
+var valor := 10
 
 @onready var collision = $CollisionShape3D
 
 var being_held = false
 
 func _ready():
+	add_to_group("monedas")
 	add_to_group("arrastrable")
 	add_to_group("agarrable")
 	mass = 0.2
@@ -95,14 +97,30 @@ func release():
 	gravity_scale = original_gravity
 	set_estado_fisico(EstadoFisico.CAIDA)
 
+func lanzar(dir: Vector3, fuerza : float):
+	release()
+	dir.y *= 0.2
+	linear_velocity = dir * fuerza
+	# spin opcional
+	angular_velocity = Vector3(
+		randf_range(-4.0, 4.0),
+		randf_range(-4.0, 4.0),
+		randf_range(-4.0, 4.0)
+	)
+
 func arrastrar(target: Vector3):
 	var dir = target - global_position
 	linear_velocity = dir * 18.0
-	angular_velocity *= 0.85
-	rotation = Vector3( deg_to_rad(90), rotation.y, rotation.z )
-
-#func arrastrar(target: Vector3):
-	#var dir = target - global_position
-	#var fuerza = dir * 25.0
-	#var damping = -linear_velocity * 6.0
-	#apply_central_force(fuerza + damping)
+	angular_velocity = Vector3.ZERO
+	if player_ref == null:
+		return
+	# posición del player/cámara
+	var player_pos = player_ref.global_position
+	# mirar hacia el player
+	var look_dir = (player_pos - global_position).normalized()
+	# construimos una base que mire al player
+	var basis_objetivo = Basis().looking_at(look_dir, Vector3.RIGHT)
+	# si tu moneda está “mal orientada”, ajusta este offset
+	#basis_objetivo = basis_objetivo.rotated(Vector3.RIGHT, rad_to_deg(90))
+	# suavizado
+	global_basis = global_basis.slerp(basis_objetivo, 0.25)

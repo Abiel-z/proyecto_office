@@ -92,6 +92,7 @@ func grab(camera):
 func release():
 	being_held = false
 	player_ref.holding_stamp = false
+	player_ref.held_stamp = null
 	player_ref = null
 	gravity_scale = original_gravity
 	set_estado_fisico(EstadoFisico.CAIDA)

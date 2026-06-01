@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TipoDocumento" load_steps=3 format=3 uid="uid://b3rucnvpbfxld"]
+
+[ext_resource type="Texture2D" uid="uid://c24n866vkt541" path="res://aseprite/margenes_hojas/mascara_normal.png" id="1_ax36b"]
+[ext_resource type="Script" path="res://gd/TipoDocumento.gd" id="1_q3dvv"]
+
+[resource]
+script = ExtResource("1_q3dvv")
+id = "CONTRATO"
+mascara_borde = ExtResource("1_ax36b")
+color_papel = Color(1, 1, 1, 1)
+tipo_timbre = ""
+posiciones_timbres = Array[Vector2]([])
+posiciones_firmas = Array[Vector2]([])
+cantidad_max_timbres = 3

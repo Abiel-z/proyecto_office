@@ -1,11 +1,14 @@
 extends Node
 
+const TIPO_DOCUMENTO = {
+	"REVISION": preload("res://tres/Tipo_Documento/revision.tres")
+}
 
 func crear_revision(
 	resultado: Dictionary,
 	hojas: Array
 ) -> Documento:
-
+	
 	# VALIDACION
 	if hojas.is_empty():
 		push_error("No se puede crear revision sin hojas")
@@ -20,8 +23,8 @@ func crear_revision(
 	# -----------------------------
 	# DATOS BASE
 	# -----------------------------
-	doc.tipo = Documento.TipoDocumento.REVISION
-
+	doc.tipo = TIPO_DOCUMENTO.REVISION
+	print(doc.tipo)
 	doc.nombre = doc_base.nombre
 	doc.cargo = doc_base.cargo
 
@@ -41,8 +44,14 @@ func crear_revision(
 	# -----------------------------
 	# METADATA
 	# -----------------------------
+	print("RESULTADO RECIBIDO:")
+	print(resultado)
+	print(resultado.keys())
+	
 	doc.metadata = resultado
-
+	
+	print("METADATA DOCUMENTO:")
+	print(doc.metadata)
 	# -----------------------------
 	# GENERAR CUERPO VISUAL
 	# -----------------------------
@@ -53,10 +62,7 @@ func crear_revision(
 
 	return doc
 
-
-func generar_documento(
-	tipo: Documento.TipoDocumento
-) -> Documento:
+func generar_documento( tipo: TipoDocumento ) -> Documento:
 
 	var doc = Documento.new()
 
