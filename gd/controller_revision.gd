@@ -82,19 +82,14 @@ func calcular_puntaje( hojas:Array ) -> Dictionary:
 	var total = int(
 		puntaje_base * multiplicador
 	)
-	var resultado := {
-		"estadisticas": estadisticas,
-		"mejor_coincidencia": mejor,
-		"puntaje_base": puntaje_base,
-		"multiplicador": multiplicador,
-		"puntaje_total": total,
-		"bonos": bonos
-	}
-	print(resultado)
-	
+
 	return {
+		
 		"estadisticas": estadisticas,
-		"mejor_coincidencia": mejor,
+		"mejor_coincidencia" : mejor,
+		"mejor_categoria": mejor["categoria"],
+		"mejor_valor": mejor["valor"],
+		"mejor_cantidad": mejor["cantidad"],
 		"puntaje_base": puntaje_base,
 		"multiplicador": multiplicador,
 		"puntaje_total": total,

@@ -52,7 +52,7 @@ angular_damp = 5.0
 script = ExtResource("1_5gm5y")
 
 [node name="SubViewport" type="SubViewport" parent="."]
-size = Vector2i(370, 512)
+size = Vector2i(385, 575)
 render_target_update_mode = 4
 
 [node name="sello" type="Sprite2D" parent="SubViewport"]
@@ -66,6 +66,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="textura_detalles_fondo" type="TextureRect" parent="SubViewport/Control"]
+modulate = Color(0.270222, 0.270222, 0.270222, 1)
+layout_mode = 0
+
+[node name="textura_texto_fijo" type="TextureRect" parent="SubViewport/Control"]
+texture_filter = 1
+texture_repeat = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="textos_dinamicos" type="Control" parent="SubViewport/Control"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="MarginContainer" type="MarginContainer" parent="SubViewport/Control"]
 layout_mode = 1

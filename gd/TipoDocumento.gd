@@ -2,8 +2,12 @@ extends Resource
 class_name TipoDocumento
 
 @export var id : String
-
 @export var mascara_borde : Texture2D
+@export var textos_fijos : Texture2D
+@export var detalles_fondo : Texture2D
+
+@export var campos : Array[CampoDocumento]
+
 @export var color_papel : Color
 @export var tipo_timbre : String
 @export var posiciones_timbres : Array[Vector2]

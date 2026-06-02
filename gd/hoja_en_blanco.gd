@@ -36,6 +36,10 @@ var image_texture: ImageTexture
 @onready var modelo_hoja = $VisualPivot/model
 @onready var visual_pivot = $VisualPivot
 
+@onready var capa_campos = $SubViewport/Control/textos_dinamicos
+@onready var textos_fijos = $SubViewport/Control/textura_texto_fijo
+@onready var detalles_fondo = $SubViewport/Control/textura_detalles_fondo
+
 @onready var punto_A : Marker3D = $punto_A
 @onready var punto_B : Marker3D = $punto_B
 @onready var mesh_instance = $hoja_blanca
@@ -53,7 +57,7 @@ func _ready():
 	add_to_group("hojas")
 	add_to_group("agarrable")
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
-	viewport.size = Vector2(370 , 512)
+	viewport.size = Vector2(385 , 575)
 	viewport.transparent_bg = true
 	viewport.disable_3d = true
 	viewport.transparent_bg = false
@@ -130,7 +134,25 @@ func aplicar_textura():
 func actualizar_visual():
 	if not documento:
 		return
-	label_texto.text = documento.cuerpo
+	detalles_fondo.texture = documento.tipo.detalles_fondo
+	textos_fijos.texture = documento.tipo.textos_fijos
+	#label_texto.text = documento.cuerpo
+	#limpiar_campos()
+	for campo in documento.tipo.campos:
+		var valor = obtener_valor_campo(campo)
+		crear_campo(campo,valor)
+	
+func crear_campo(campo: CampoDocumento, valor):
+	var label = Label.new()
+	label.position = campo.posicion
+	label.size = campo.size
+	label.autowrap_mode= TextServer.AUTOWRAP_WORD
+	label.text = str(valor)
+	label.add_theme_color_override("font_color", campo.color)
+	capa_campos.add_child(label)
+
+func obtener_valor_campo( campo : CampoDocumento):
+	return documento.metadata.get(campo.id,campo.texto_default)
 
 func reiniciar_pivot():
 	visual_pivot.position = Vector3.ZERO

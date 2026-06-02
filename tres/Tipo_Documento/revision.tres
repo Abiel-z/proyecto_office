@@ -1,12 +1,84 @@
-[gd_resource type="Resource" script_class="TipoDocumento" load_steps=3 format=3 uid="uid://lke74wm2e5k3"]
+[gd_resource type="Resource" script_class="TipoDocumento" load_steps=12 format=3 uid="uid://lke74wm2e5k3"]
 
+[ext_resource type="Texture2D" uid="uid://7wpea46iaska" path="res://aseprite/margenes_hojas/REVISION/detalles_fondo_revision.png" id="1_ks8dn"]
 [ext_resource type="Texture2D" uid="uid://05p0sui80bdw" path="res://aseprite/margenes_hojas/mascara_fax.png" id="1_l36cb"]
+[ext_resource type="Script" path="res://gd/Campo documento/campo_documento.gd" id="1_xt8rv"]
 [ext_resource type="Script" path="res://gd/TipoDocumento.gd" id="2_lfy0p"]
+[ext_resource type="Texture2D" uid="uid://mhjx2ph55oot" path="res://aseprite/margenes_hojas/REVISION/textos_revision.png" id="4_dur31"]
+
+[sub_resource type="Resource" id="Resource_27yq3"]
+script = ExtResource("1_xt8rv")
+id = "categoria_principal"
+posicion = Vector2(230, 110)
+color = Color(0, 1, 0, 1)
+texto_default = "LABEL"
+size = Vector2(50, 10)
+capa = "1"
+visible = true
+editable = false
+
+[sub_resource type="Resource" id="Resource_nyt0y"]
+script = ExtResource("1_xt8rv")
+id = "valor_coincidente"
+posicion = Vector2(230, 150)
+color = Color(0, 0, 1, 1)
+texto_default = "LABEL"
+size = Vector2(50, 10)
+capa = "1"
+visible = true
+editable = false
+
+[sub_resource type="Resource" id="Resource_fh8am"]
+script = ExtResource("1_xt8rv")
+id = "mejor_categoria"
+posicion = Vector2(250, 210)
+color = Color(1, 0, 0, 1)
+texto_default = ""
+size = Vector2(0, 0)
+capa = ""
+visible = true
+editable = false
+
+[sub_resource type="Resource" id="Resource_w2cpm"]
+script = ExtResource("1_xt8rv")
+id = "puntaje_base"
+posicion = Vector2(250, 240)
+color = Color(0.934691, 1.53056e-05, 0.633326, 1)
+texto_default = ""
+size = Vector2(0, 0)
+capa = ""
+visible = true
+editable = false
+
+[sub_resource type="Resource" id="Resource_h2fa3"]
+script = ExtResource("1_xt8rv")
+id = "bonos"
+posicion = Vector2(250, 270)
+color = Color(0, 0.952586, 0.876457, 1)
+texto_default = ""
+size = Vector2(0, 0)
+capa = ""
+visible = false
+editable = false
+
+[sub_resource type="Resource" id="Resource_jwjoc"]
+script = ExtResource("1_xt8rv")
+id = "puntaje_total"
+posicion = Vector2(250, 300)
+color = Color(0.417846, 0.322542, 0, 1)
+texto_default = ""
+size = Vector2(0, 0)
+capa = ""
+visible = true
+editable = false
 
 [resource]
 script = ExtResource("2_lfy0p")
 id = "REVISION"
 mascara_borde = ExtResource("1_l36cb")
+textos_fijos = ExtResource("4_dur31")
+detalles_fondo = ExtResource("1_ks8dn")
+campos = Array[ExtResource("1_xt8rv")]([SubResource("Resource_27yq3"), SubResource("Resource_nyt0y"), SubResource("Resource_fh8am"), SubResource("Resource_w2cpm"), SubResource("Resource_h2fa3"), SubResource("Resource_jwjoc")])
 color_papel = Color(1, 1, 0.741176, 1)
 tipo_timbre = ""
 posiciones_timbres = Array[Vector2]([])

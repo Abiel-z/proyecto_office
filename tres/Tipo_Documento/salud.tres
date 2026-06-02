@@ -7,7 +7,7 @@
 script = ExtResource("1_pmaks")
 id = "SALUD"
 mascara_borde = ExtResource("1_x5s2h")
-color_papel = Color(1, 1, 1, 1)
+color_papel = Color(0.965957, 0.943804, 0.715446, 1)
 tipo_timbre = ""
 posiciones_timbres = Array[Vector2]([])
 posiciones_firmas = Array[Vector2]([])

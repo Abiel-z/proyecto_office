@@ -5,7 +5,7 @@ render_mode unshaded, blend_mix, cull_disabled;
 uniform sampler2D documento_texture;
 uniform sampler2D mascara_borde;
 
-uniform vec4 color_borde : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform vec4 color_borde : source_color = vec4(0.18, 0.20, 0.25, 1.0);
 
 uniform float grosor_borde = 0.004;
 

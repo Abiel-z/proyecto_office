@@ -1,0 +1,33 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://kanaq8baug5j"
+path="res://.godot/imported/ARIALI 1.TTF-d7d8e03f2a375618de5cb6eaec80efd2.fontdata"
+
+[deps]
+
+source_file="res://fuentes/arial/ARIALI 1.TTF"
+dest_files=["res://.godot/imported/ARIALI 1.TTF-d7d8e03f2a375618de5cb6eaec80efd2.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}
