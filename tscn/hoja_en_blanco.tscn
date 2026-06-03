@@ -74,6 +74,7 @@ layout_mode = 0
 [node name="textura_texto_fijo" type="TextureRect" parent="SubViewport/Control"]
 texture_filter = 1
 texture_repeat = 1
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
