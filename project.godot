@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+DatabaseTemplatesDocumentos="*res://gd/database_templates_documentos.gd"
 DatabaseTrabajadores="*res://gd/database_trabajadores.gd"
 ControllerSpawner="*res://gd/controller_spawner.gd"
 DatabaseSistema="*res://gd/database_sistema.gd"
@@ -24,6 +25,9 @@ RenderDocumentos="*res://gd/render_documentos.gd"
 ControllerRevision="*res://gd/controller_revision.gd"
 ControllerEconomia="*res://gd/controller_economia.gd"
 ControllerSpawnerTienda="*res://gd/controller_spawner_tienda.gd"
+DatabaseExpedientes="*res://gd/database_expedientes.gd"
+DatabaseTipoDocumento="*res://gd/database_tipo_documento.gd"
+TemplatesDocumentosDb="*res://templates_documentos_db.gd"
 
 [display]
 

@@ -20,9 +20,6 @@ func generar_bbcode_documento(doc: Documento) -> String:
 func generar_revision(doc: Documento) -> String:
 
 	var data = doc.metadata
-
-	print(data)
-	print(data.keys())
 	
 	var mejor = data["mejor_coincidencia"]
 

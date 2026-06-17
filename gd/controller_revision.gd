@@ -27,14 +27,6 @@ func revisar_hojas(hojas:Array):
 		sumar_valor( estadisticas["tipo"], doc.tipo.id )
 		sumar_valor( estadisticas["fecha"], doc.fecha )
 		
-		print("DOC:", doc)
-		print("nombre:", doc.nombre)
-		print("cargo:", doc.cargo)
-		print("tipo:", doc.tipo)
-		print("fecha:", doc.fecha)
-		
-	print("ESTADISTICAS FINALES:")
-	print(estadisticas)
 	return estadisticas
 	
 func sumar_valor(dic:Dictionary, valor):

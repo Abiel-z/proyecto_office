@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://epcm1t5pns00"
+path="res://.godot/imported/ChatGPT Image 3 jun 2026, 01_21_43 a.m.png-87dfee1ca6d0a3919181745076fda569.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://aseprite/imagenes/ChatGPT Image 3 jun 2026, 01_21_43 a.m.png"
+dest_files=["res://.godot/imported/ChatGPT Image 3 jun 2026, 01_21_43 a.m.png-87dfee1ca6d0a3919181745076fda569.ctex"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=1

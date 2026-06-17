@@ -1,6 +1,9 @@
 extends Resource
 class_name Documento
 
+func get_hojas():
+	return self
+
 @export var tipo : TipoDocumento 
 @export var nombre : String
 @export var cargo : String

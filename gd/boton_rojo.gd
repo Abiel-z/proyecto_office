@@ -6,6 +6,8 @@ signal boton_presionado()
 @onready var luz : OmniLight3D = $OmniLight3D
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	
 	luz.light_energy = 0.0
 	add_to_group("botones")
 	pass # Replace with function body.

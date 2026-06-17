@@ -1,6 +1,6 @@
 shader_type spatial;
 
-render_mode unshaded, blend_mix, cull_disabled;
+render_mode blend_mix, cull_disabled;
 
 uniform sampler2D documento_texture;
 uniform sampler2D mascara_borde;

@@ -1,12 +1,19 @@
-[gd_resource type="Resource" script_class="TipoDocumento" load_steps=3 format=3 uid="uid://d3dgs7qo6ur6g"]
+[gd_resource type="Resource" script_class="TipoDocumento" load_steps=6 format=3 uid="uid://d3dgs7qo6ur6g"]
 
 [ext_resource type="Script" path="res://gd/TipoDocumento.gd" id="1_0w1yl"]
-[ext_resource type="Texture2D" uid="uid://bagyf3ia7klmy" path="res://aseprite/margenes_hojas/mascara_zigzag.png" id="1_qfuo8"]
+[ext_resource type="Texture2D" uid="uid://dujd8ju6oi082" path="res://aseprite/HORARIO/detalles_fondo.png" id="1_hn7i5"]
+[ext_resource type="Texture2D" uid="uid://xm72opubj1g5" path="res://aseprite/contrato/mascara_borde.png" id="2_el58e"]
+[ext_resource type="Texture2D" uid="uid://fmwaek7bnva6" path="res://aseprite/HORARIO/texto_base.png" id="4_502ir"]
+[ext_resource type="Texture2D" uid="uid://blblkpo3nm7hg" path="res://aseprite/contrato/base.png" id="5_8wnxo"]
 
 [resource]
 script = ExtResource("1_0w1yl")
 id = "HORARIO"
-mascara_borde = ExtResource("1_qfuo8")
+textura_base = ExtResource("5_8wnxo")
+mascara_borde = ExtResource("2_el58e")
+textos_fijos = ExtResource("4_502ir")
+detalles_fondo = ExtResource("1_hn7i5")
+campos = Array[Resource("res://gd/Campo documento/campo_documento.gd")]([])
 color_papel = Color(1, 1, 1, 1)
 tipo_timbre = ""
 posiciones_timbres = Array[Vector2]([])

@@ -1,0 +1,146 @@
+[gd_resource type="Resource" script_class="TipoDocumento" load_steps=11 format=3 uid="uid://csrt6g240p3j5"]
+
+[ext_resource type="Script" path="res://gd/Campo documento/campo_documento.gd" id="1_3b5x3"]
+[ext_resource type="Script" path="res://gd/TipoDocumento.gd" id="1_jkn6e"]
+[ext_resource type="Texture2D" uid="uid://xm72opubj1g5" path="res://aseprite/contrato/mascara_borde.png" id="2_nxl4o"]
+[ext_resource type="Texture2D" uid="uid://blblkpo3nm7hg" path="res://aseprite/contrato/base.png" id="5_s6qwg"]
+
+[sub_resource type="Resource" id="Resource_b80dc"]
+script = ExtResource("1_3b5x3")
+id = "parrafo_1"
+fuente = 1
+template_parrafo = "parrafo_1"
+posicion = Vector2(20, 50)
+color = Color(0, 0, 0, 1)
+color_variable = "roja"
+texto_default = ""
+size = Vector2(340, 200)
+capa = ""
+visible = false
+editable = false
+font_size = 9.0
+clip_content = false
+bbcode_activo = true
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_2cqyf"]
+script = ExtResource("1_3b5x3")
+id = "parrafo_2"
+fuente = 1
+template_parrafo = "parrafo_2"
+posicion = Vector2(20, 120)
+color = Color(0, 0, 0, 1)
+color_variable = "roja"
+texto_default = ""
+size = Vector2(340, 200)
+capa = ""
+visible = false
+editable = false
+font_size = 9.0
+clip_content = false
+bbcode_activo = true
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_2jrce"]
+script = ExtResource("1_3b5x3")
+id = "parrafo_3"
+fuente = 1
+template_parrafo = "parrafo_3"
+posicion = Vector2(20, 190)
+color = Color(0, 0, 0, 1)
+color_variable = "roja"
+texto_default = ""
+size = Vector2(340, 200)
+capa = ""
+visible = false
+editable = false
+font_size = 9.0
+clip_content = false
+bbcode_activo = true
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_c5okq"]
+script = ExtResource("1_3b5x3")
+id = "parrafo_4"
+fuente = 1
+template_parrafo = "parrafo_4"
+posicion = Vector2(20, 240)
+color = Color(0, 0, 0, 1)
+color_variable = "roja"
+texto_default = ""
+size = Vector2(340, 200)
+capa = ""
+visible = false
+editable = false
+font_size = 9.0
+clip_content = false
+bbcode_activo = true
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_bgnuq"]
+script = ExtResource("1_3b5x3")
+id = "fima_1"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(20, 500)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = "________________"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_cli47"]
+script = ExtResource("1_3b5x3")
+id = "firma_2"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(250, 500)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = "________________"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[resource]
+script = ExtResource("1_jkn6e")
+id = "HOJA_FIRMAS"
+template_id = "hoja_firmas"
+textura_base = ExtResource("5_s6qwg")
+mascara_borde = ExtResource("2_nxl4o")
+campos = Array[ExtResource("1_3b5x3")]([SubResource("Resource_b80dc"), SubResource("Resource_2cqyf"), SubResource("Resource_2jrce"), SubResource("Resource_c5okq"), SubResource("Resource_bgnuq"), SubResource("Resource_cli47")])
+dibujos = Array[Resource("res://gd/dibujo_documento.gd")]([])
+color_papel = Color(0, 0, 0, 1)
+tipo_timbre = ""
+posiciones_timbres = Array[Vector2]([])
+posiciones_firmas = Array[Vector2]([])
+cantidad_max_timbres = 3

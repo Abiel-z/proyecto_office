@@ -24,7 +24,6 @@ func crear_revision(
 	# DATOS BASE
 	# -----------------------------
 	doc.tipo = TIPO_DOCUMENTO.REVISION
-	print(doc.tipo)
 	doc.nombre = doc_base.nombre
 	doc.cargo = doc_base.cargo
 
@@ -44,14 +43,9 @@ func crear_revision(
 	# -----------------------------
 	# METADATA
 	# -----------------------------
-	print("RESULTADO RECIBIDO:")
-	print(resultado)
-	print(resultado.keys())
 	
 	doc.metadata = resultado
 	
-	print("METADATA DOCUMENTO:")
-	print(doc.metadata)
 	# -----------------------------
 	# GENERAR CUERPO VISUAL
 	# -----------------------------

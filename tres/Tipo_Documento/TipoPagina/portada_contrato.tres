@@ -1,0 +1,104 @@
+[gd_resource type="Resource" script_class="TipoDocumento" load_steps=9 format=3 uid="uid://b575fp611n0a8"]
+
+[ext_resource type="Script" path="res://gd/Campo documento/campo_documento.gd" id="1_l4cu0"]
+[ext_resource type="Texture2D" uid="uid://xm72opubj1g5" path="res://aseprite/contrato/mascara_borde.png" id="2_6wbpa"]
+[ext_resource type="Script" path="res://gd/TipoDocumento.gd" id="3_43sv2"]
+[ext_resource type="Texture2D" uid="uid://blblkpo3nm7hg" path="res://aseprite/contrato/base.png" id="5_ha6ma"]
+
+[sub_resource type="Resource" id="Resource_nur6b"]
+script = ExtResource("1_l4cu0")
+id = "titulo_1"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(0, 50)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = "CONTRATO LABORAL"
+size = Vector2(375, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 1
+alineacion_vertical = 1
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_qg6ox"]
+script = ExtResource("1_l4cu0")
+id = "parrafo_1"
+fuente = 1
+template_parrafo = "parrafo_1"
+posicion = Vector2(20, 150)
+color = Color(0, 0, 0, 1)
+color_variable = "roja"
+texto_default = ""
+size = Vector2(340, 200)
+capa = ""
+visible = false
+editable = false
+font_size = 9.0
+clip_content = true
+bbcode_activo = true
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_gon2x"]
+script = ExtResource("1_l4cu0")
+id = "parrafo_2"
+fuente = 1
+template_parrafo = "parrafo_2"
+posicion = Vector2(20, 210)
+color = Color(0, 0, 0, 1)
+color_variable = "roja"
+texto_default = ""
+size = Vector2(340, 200)
+capa = ""
+visible = false
+editable = false
+font_size = 9.0
+clip_content = false
+bbcode_activo = true
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_6ciat"]
+script = ExtResource("1_l4cu0")
+id = "parrafo_3"
+fuente = 1
+template_parrafo = "parrafo_3"
+posicion = Vector2(20, 280)
+color = Color(0, 0, 0, 1)
+color_variable = "roja"
+texto_default = ""
+size = Vector2(340, 200)
+capa = ""
+visible = false
+editable = false
+font_size = 9.0
+clip_content = false
+bbcode_activo = true
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[resource]
+script = ExtResource("3_43sv2")
+id = "PORTADA_CONTRATO"
+template_id = "contrato_base"
+textura_base = ExtResource("5_ha6ma")
+mascara_borde = ExtResource("2_6wbpa")
+campos = Array[ExtResource("1_l4cu0")]([SubResource("Resource_nur6b"), SubResource("Resource_qg6ox"), SubResource("Resource_gon2x"), SubResource("Resource_6ciat")])
+dibujos = Array[Resource("res://gd/dibujo_documento.gd")]([])
+color_papel = Color(0, 0, 0, 1)
+tipo_timbre = ""
+posiciones_timbres = Array[Vector2]([])
+posiciones_firmas = Array[Vector2]([])
+cantidad_max_timbres = 3

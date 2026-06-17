@@ -1,0 +1,174 @@
+[gd_resource type="Resource" script_class="TipoDocumento" load_steps=13 format=3 uid="uid://f1hk81y72508"]
+
+[ext_resource type="Script" path="res://gd/TipoDocumento.gd" id="1_58t2p"]
+[ext_resource type="Script" path="res://gd/Campo documento/campo_documento.gd" id="1_x0r6b"]
+[ext_resource type="Script" path="res://gd/rectangulo_dibujo.gd" id="2_ywumx"]
+[ext_resource type="Texture2D" uid="uid://blblkpo3nm7hg" path="res://aseprite/contrato/base.png" id="3_ow85r"]
+
+[sub_resource type="Resource" id="Resource_ih3ht"]
+script = ExtResource("1_x0r6b")
+id = "titulo_1"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(0, 75)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = "INFORME INCIDENTE"
+size = Vector2(375, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 1
+alineacion_vertical = 1
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_nqvw3"]
+script = ExtResource("1_x0r6b")
+id = "parrafo_1"
+fuente = 1
+template_parrafo = "parrafo_1"
+posicion = Vector2(20, 110)
+color = Color(0, 0, 0, 1)
+color_variable = "roja"
+texto_default = ""
+size = Vector2(340, 200)
+capa = ""
+visible = false
+editable = false
+font_size = 9.0
+clip_content = true
+bbcode_activo = true
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_0qmc2"]
+script = ExtResource("1_x0r6b")
+id = "titulo_2"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(20, 210)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = "MOTIVO INFORME    :"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_dpwwm"]
+script = ExtResource("1_x0r6b")
+id = "tipo_evento"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(210, 210)
+color = Color(0.584314, 0, 0, 1)
+color_variable = ""
+texto_default = "LAUCHA CON CSARNA"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_eddsm"]
+script = ExtResource("1_x0r6b")
+id = "motivo_evento"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(70, 300)
+color = Color(0.584314, 0, 0, 1)
+color_variable = ""
+texto_default = "NOMBRE EVENTO"
+size = Vector2(340, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 24.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_ntdvh"]
+script = ExtResource("1_x0r6b")
+id = "fecha_evento"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(170, 340)
+color = Color(0.584314, 0, 0, 1)
+color_variable = ""
+texto_default = "xx -xx -xx"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_ir518"]
+script = ExtResource("1_x0r6b")
+id = "parrafo_2"
+fuente = 1
+template_parrafo = "parrafo_2"
+posicion = Vector2(20, 470)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = ""
+size = Vector2(340, 200)
+capa = ""
+visible = false
+editable = false
+font_size = 9.0
+clip_content = false
+bbcode_activo = true
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_1vlug"]
+script = ExtResource("2_ywumx")
+"tamaño" = Vector2(340, 200)
+grosor_borde = 1.0
+color_borde = Color(0, 0, 0, 1)
+color_relleno = Color(0.596812, 0.425383, 0.271225, 0)
+posicion = Vector2(20, 250)
+
+[resource]
+script = ExtResource("1_58t2p")
+id = "INFORME_INCIDENTE"
+template_id = "informe_incidente"
+textura_base = ExtResource("3_ow85r")
+campos = Array[ExtResource("1_x0r6b")]([SubResource("Resource_ih3ht"), SubResource("Resource_nqvw3"), SubResource("Resource_0qmc2"), SubResource("Resource_dpwwm"), SubResource("Resource_eddsm"), SubResource("Resource_ntdvh"), SubResource("Resource_ir518")])
+dibujos = Array[Resource("res://gd/dibujo_documento.gd")]([SubResource("Resource_1vlug")])
+color_papel = Color(0, 0, 0, 1)
+tipo_timbre = ""
+posiciones_timbres = Array[Vector2]([])
+posiciones_firmas = Array[Vector2]([])
+cantidad_max_timbres = 3

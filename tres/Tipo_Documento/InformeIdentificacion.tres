@@ -1,0 +1,171 @@
+[gd_resource type="Resource" script_class="TipoDocumento" load_steps=14 format=3 uid="uid://davgpwmv5mp5u"]
+
+[ext_resource type="Script" path="res://gd/Campo documento/campo_documento.gd" id="1_7catm"]
+[ext_resource type="Script" path="res://gd/TipoDocumento.gd" id="1_eisp6"]
+[ext_resource type="Texture2D" uid="uid://bck06cya7bgm" path="res://aseprite/doc-identificacion/detalles-fondo.png" id="1_jhb6i"]
+[ext_resource type="Texture2D" uid="uid://cp4gub4wxmwlb" path="res://aseprite/doc-identificacion/mascara-borde.png" id="2_xn4tb"]
+[ext_resource type="Texture2D" uid="uid://cpen44j57rr1w" path="res://aseprite/doc-identificacion/textos-fijos.png" id="4_ob3bn"]
+[ext_resource type="Texture2D" uid="uid://csxt6x1ftm3hl" path="res://aseprite/doc-identificacion/base.png" id="5_ew26n"]
+
+[sub_resource type="Resource" id="Resource_xxyk1"]
+script = ExtResource("1_7catm")
+id = "rut"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(260.8, 110)
+color = Color(0.611765, 0.0705882, 0.137255, 1)
+color_variable = ""
+texto_default = "XXXX - X"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_i7nsq"]
+script = ExtResource("1_7catm")
+id = "nombre"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(241.19, 131.5)
+color = Color(0.611765, 0.0705882, 0.137255, 1)
+color_variable = ""
+texto_default = "Nombre Trab"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_5rbn1"]
+script = ExtResource("1_7catm")
+id = "cargo"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(250, 220)
+color = Color(0.61295, 0.0719405, 0.137828, 1)
+color_variable = ""
+texto_default = "CARGO"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_jp5v5"]
+script = ExtResource("1_7catm")
+id = "area_trabajo"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(215, 265)
+color = Color(0.611765, 0.0705882, 0.137255, 1)
+color_variable = ""
+texto_default = "MANTENIMIENTO"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_lkt2p"]
+script = ExtResource("1_7catm")
+id = "fecha_ingreso"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(240, 310)
+color = Color(0.611765, 0.0705882, 0.137255, 1)
+color_variable = ""
+texto_default = "10 / 20 / 2002"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_wo2iu"]
+script = ExtResource("1_7catm")
+id = "nivel_operativo"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(272.84, 354.67)
+color = Color(0.611765, 0.0705882, 0.137255, 1)
+color_variable = ""
+texto_default = "I I "
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_thtp3"]
+script = ExtResource("1_7catm")
+id = "estado_laboral"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(240, 430)
+color = Color(0.611765, 0.0705882, 0.137255, 1)
+color_variable = ""
+texto_default = "OPERATIVO"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[resource]
+script = ExtResource("1_eisp6")
+id = "InformeIdentificacion"
+template_id = ""
+textura_base = ExtResource("5_ew26n")
+mascara_borde = ExtResource("2_xn4tb")
+textos_fijos = ExtResource("4_ob3bn")
+detalles_fondo = ExtResource("1_jhb6i")
+campos = Array[ExtResource("1_7catm")]([SubResource("Resource_xxyk1"), SubResource("Resource_i7nsq"), SubResource("Resource_5rbn1"), SubResource("Resource_jp5v5"), SubResource("Resource_lkt2p"), SubResource("Resource_wo2iu"), SubResource("Resource_thtp3")])
+dibujos = Array[Resource("res://gd/dibujo_documento.gd")]([])
+color_papel = Color(1, 1, 1, 1)
+tipo_timbre = ""
+posiciones_timbres = Array[Vector2]([])
+posiciones_firmas = Array[Vector2]([])
+cantidad_max_timbres = 3

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="TipoDocumento" load_steps=6 format=3 uid="uid://cmwiveannvgd6"]
+
+[ext_resource type="Script" path="res://gd/TipoDocumento.gd" id="1_hnrmn"]
+[ext_resource type="Texture2D" uid="uid://7xgcj5w5oi7w" path="res://aseprite/examen_medico/detalles_fondo.png" id="1_lsjy4"]
+[ext_resource type="Texture2D" uid="uid://xm72opubj1g5" path="res://aseprite/contrato/mascara_borde.png" id="2_6lyda"]
+[ext_resource type="Texture2D" uid="uid://3ni8mk4uqxg7" path="res://aseprite/examen_medico/textos_fijos.png" id="4_cucrd"]
+[ext_resource type="Texture2D" uid="uid://blblkpo3nm7hg" path="res://aseprite/contrato/base.png" id="5_nkxpb"]
+
+[resource]
+script = ExtResource("1_hnrmn")
+id = "EXAMEN_MEDICO"
+textura_base = ExtResource("5_nkxpb")
+mascara_borde = ExtResource("2_6lyda")
+textos_fijos = ExtResource("4_cucrd")
+detalles_fondo = ExtResource("1_lsjy4")
+campos = Array[Resource("res://gd/Campo documento/campo_documento.gd")]([])
+color_papel = Color(1, 1, 1, 1)
+tipo_timbre = ""
+posiciones_timbres = Array[Vector2]([])
+posiciones_firmas = Array[Vector2]([])
+cantidad_max_timbres = 3

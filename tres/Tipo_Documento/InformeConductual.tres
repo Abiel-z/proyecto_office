@@ -1,0 +1,192 @@
+[gd_resource type="Resource" script_class="TipoDocumento" load_steps=15 format=3 uid="uid://cyigvkdawgjhw"]
+
+[ext_resource type="Script" path="res://gd/TipoDocumento.gd" id="1_cys7n"]
+[ext_resource type="Script" path="res://gd/Campo documento/campo_documento.gd" id="1_hc7kn"]
+[ext_resource type="Texture2D" uid="uid://y6ugabek3x8l" path="res://aseprite/doc_conductual/DETALLES-FONDO.png" id="1_n58bl"]
+[ext_resource type="Texture2D" uid="uid://dxn1m7ht7r2ce" path="res://aseprite/doc_conductual/MASCARA-BORDE.png" id="2_fghph"]
+[ext_resource type="Texture2D" uid="uid://bh67l7vpujroh" path="res://aseprite/doc_conductual/TEXTOS-FIJOS.png" id="4_srcm5"]
+[ext_resource type="Texture2D" uid="uid://beb2xeksxnb1c" path="res://aseprite/doc_conductual/BASE.png" id="5_wh24m"]
+
+[sub_resource type="Resource" id="Resource_31vab"]
+script = ExtResource("1_hc7kn")
+id = "rut_id"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(250, 110)
+color = Color(0.611765, 0.0705882, 0.137255, 1)
+color_variable = ""
+texto_default = "XXXX - X"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 10.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_whdc7"]
+script = ExtResource("1_hc7kn")
+id = "nombre"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(240, 130)
+color = Color(0.611765, 0.0705882, 0.137255, 1)
+color_variable = ""
+texto_default = "Nombre Trab"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 10.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_cy4w5"]
+script = ExtResource("1_hc7kn")
+id = "historial_1"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(90, 225)
+color = Color(0.611765, 0.0705882, 0.137255, 1)
+color_variable = ""
+texto_default = "Historial 1"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_rwsjn"]
+script = ExtResource("1_hc7kn")
+id = "historial_2"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(90, 260)
+color = Color(0.611765, 0.0705882, 0.137255, 1)
+color_variable = ""
+texto_default = "Historial 2"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_n4dg6"]
+script = ExtResource("1_hc7kn")
+id = "historial_3"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(90, 295)
+color = Color(0.611765, 0.0705882, 0.137255, 1)
+color_variable = ""
+texto_default = "Historial 3"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_yhsip"]
+script = ExtResource("1_hc7kn")
+id = "historial_4"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(90, 330)
+color = Color(0.611765, 0.0705882, 0.137255, 1)
+color_variable = ""
+texto_default = "Historial 4"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_5mgl2"]
+script = ExtResource("1_hc7kn")
+id = "historial_5"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(90, 360)
+color = Color(0.611765, 0.0705882, 0.137255, 1)
+color_variable = ""
+texto_default = "Historial 5"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_dypp8"]
+script = ExtResource("1_hc7kn")
+id = "historial_6"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(90, 395)
+color = Color(0.611765, 0.0705882, 0.137255, 1)
+color_variable = ""
+texto_default = "Historial 6"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[resource]
+script = ExtResource("1_cys7n")
+id = "InformeConductual"
+template_id = ""
+textura_base = ExtResource("5_wh24m")
+mascara_borde = ExtResource("2_fghph")
+textos_fijos = ExtResource("4_srcm5")
+detalles_fondo = ExtResource("1_n58bl")
+campos = Array[ExtResource("1_hc7kn")]([SubResource("Resource_31vab"), SubResource("Resource_whdc7"), SubResource("Resource_cy4w5"), SubResource("Resource_rwsjn"), SubResource("Resource_n4dg6"), SubResource("Resource_yhsip"), SubResource("Resource_5mgl2"), SubResource("Resource_dypp8")])
+dibujos = Array[Resource("res://gd/dibujo_documento.gd")]([])
+color_papel = Color(1, 1, 1, 1)
+tipo_timbre = ""
+posiciones_timbres = Array[Vector2]([])
+posiciones_firmas = Array[Vector2]([])
+cantidad_max_timbres = 3

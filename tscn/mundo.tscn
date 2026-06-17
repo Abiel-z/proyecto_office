@@ -13,9 +13,15 @@
 [ext_resource type="PackedScene" uid="uid://dlrlta1etqikx" path="res://tscn/estacion_compra_v_2.tscn" id="12_j31i5"]
 
 [sub_resource type="Environment" id="Environment_1as1e"]
+background_energy_multiplier = 0.0
 
 [node name="mundo" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.347219, 0, 3.52749)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.682373, 3.50342, -3.43417)
+omni_range = 4.801
+omni_attenuation = 0.732043
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1as1e")

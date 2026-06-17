@@ -1,0 +1,188 @@
+[gd_resource type="Resource" script_class="TipoDocumento" load_steps=13 format=3 uid="uid://bfkvg2p5wj62v"]
+
+[ext_resource type="Script" path="res://gd/Campo documento/campo_documento.gd" id="1_mo6os"]
+[ext_resource type="Script" path="res://gd/TipoDocumento.gd" id="1_v6sqa"]
+[ext_resource type="Texture2D" uid="uid://xm72opubj1g5" path="res://aseprite/contrato/mascara_borde.png" id="2_stx0b"]
+[ext_resource type="Texture2D" uid="uid://blblkpo3nm7hg" path="res://aseprite/contrato/base.png" id="5_dxysa"]
+
+[sub_resource type="Resource" id="Resource_08qwv"]
+script = ExtResource("1_mo6os")
+id = "fecha_ingreso"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(270, 50)
+color = Color(0.584314, 0, 0, 1)
+color_variable = ""
+texto_default = "00 / 00 / 0000"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 10.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_5vv0f"]
+script = ExtResource("1_mo6os")
+id = "titulo_1"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(0, 70)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = "ANEXO DE CONFIDENCIALIDAD Y RESERVA DE INFORMACIÓN"
+size = Vector2(375, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 10.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 1
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_v2mb6"]
+script = ExtResource("1_mo6os")
+id = "parrafo_1"
+fuente = 1
+template_parrafo = "parrafo_1"
+posicion = Vector2(25, 100)
+color = Color(0, 0, 0, 1)
+color_variable = "roja"
+texto_default = ""
+size = Vector2(333, 400)
+capa = ""
+visible = false
+editable = false
+font_size = 9.0
+clip_content = false
+bbcode_activo = true
+multilinea = false
+alineacion_horizontal = 3
+alineacion_vertical = 0
+autowrap = false
+
+[sub_resource type="Resource" id="Resource_2mc7c"]
+script = ExtResource("1_mo6os")
+id = "parrafo_2"
+fuente = 1
+template_parrafo = "parrafo_2"
+posicion = Vector2(25, 200)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = ""
+size = Vector2(333, 400)
+capa = ""
+visible = false
+editable = false
+font_size = 9.0
+clip_content = false
+bbcode_activo = true
+multilinea = false
+alineacion_horizontal = 3
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_qrr4c"]
+script = ExtResource("1_mo6os")
+id = "titulo_2"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(0, 290)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = "COMPROMISOS OPERATIVOS"
+size = Vector2(375, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 10.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 1
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_txpaw"]
+script = ExtResource("1_mo6os")
+id = "parrafo_3"
+fuente = 1
+template_parrafo = "parrafo_3"
+posicion = Vector2(25, 320)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = ""
+size = Vector2(333, 400)
+capa = ""
+visible = false
+editable = false
+font_size = 9.0
+clip_content = false
+bbcode_activo = true
+multilinea = false
+alineacion_horizontal = 3
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_0ua2r"]
+script = ExtResource("1_mo6os")
+id = "parrafo_4"
+fuente = 1
+template_parrafo = "parrafo_4"
+posicion = Vector2(25, 410)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = ""
+size = Vector2(333, 300)
+capa = ""
+visible = false
+editable = false
+font_size = 9.0
+clip_content = false
+bbcode_activo = true
+multilinea = false
+alineacion_horizontal = 3
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_f4rwv"]
+script = ExtResource("1_mo6os")
+id = "numero_pagina"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(30, 540)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = "1 / 3"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[resource]
+script = ExtResource("1_v6sqa")
+id = "ANEXO_CONFIDENCIALIDAD"
+template_id = "anexo_conf"
+textura_base = ExtResource("5_dxysa")
+mascara_borde = ExtResource("2_stx0b")
+campos = Array[ExtResource("1_mo6os")]([SubResource("Resource_08qwv"), SubResource("Resource_5vv0f"), SubResource("Resource_v2mb6"), SubResource("Resource_2mc7c"), SubResource("Resource_qrr4c"), SubResource("Resource_txpaw"), SubResource("Resource_0ua2r"), SubResource("Resource_f4rwv")])
+dibujos = Array[Resource("res://gd/dibujo_documento.gd")]([])
+color_papel = Color(0, 0, 0, 1)
+tipo_timbre = ""
+posiciones_timbres = Array[Vector2]([])
+posiciones_firmas = Array[Vector2]([])
+cantidad_max_timbres = 3

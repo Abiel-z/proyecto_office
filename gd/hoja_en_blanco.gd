@@ -36,9 +36,11 @@ var image_texture: ImageTexture
 @onready var modelo_hoja = $VisualPivot/model
 @onready var visual_pivot = $VisualPivot
 
-@onready var capa_campos = $SubViewport/Control/textos_dinamicos
+@onready var textura_base = $SubViewport/Control/textura_base
 @onready var textos_fijos = $SubViewport/Control/textura_texto_fijo
 @onready var detalles_fondo = $SubViewport/Control/textura_detalles_fondo
+@onready var capa_campos = $SubViewport/Control/textos_dinamicos
+@onready var capa_dibujos = $SubViewport/Control/dibujos_dinamicos
 
 @onready var punto_A : Marker3D = $punto_A
 @onready var punto_B : Marker3D = $punto_B
@@ -54,6 +56,8 @@ var documento : Documento
 @onready var debug_flecha = $debug_flecha
 
 func _ready():
+	
+	
 	add_to_group("hojas")
 	add_to_group("agarrable")
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
@@ -112,44 +116,80 @@ func aplicar_textura():
 
 	modelo_hoja.material_override = shader_material
 
-#func aplicar_textura():
-	#await get_tree().process_frame
-	#
-	#var viewport_texture = viewport.get_texture()
-	#var material = StandardMaterial3D.new()
-	#var shader_material = ShaderMaterial.new()
-	#
-	#shader_material.shader = SHADER_HOJA
-	#shader_material.set_shader_parameter("documento_texture",viewport_texture)
-	#shader_material.set_shader_parameter("mascara_borde", documento.tipo.mascara_borde)
-	#modelo_hoja.material_override = shader_material
-	#material.albedo_texture = viewport_texture
-	#
-	#material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	#material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	#material.cull_mode = BaseMaterial3D.CULL_FRONT
-	#modelo_hoja.material_override = material
-	#
-
 func actualizar_visual():
 	if not documento:
 		return
+	textura_base.texture = documento.tipo.textura_base
 	detalles_fondo.texture = documento.tipo.detalles_fondo
 	textos_fijos.texture = documento.tipo.textos_fijos
-	#label_texto.text = documento.cuerpo
+	label_texto.text = documento.cuerpo
 	#limpiar_campos()
+	
+	
+	if capa_dibujos:
+		capa_dibujos.dibujos = documento.tipo.dibujos
+		capa_dibujos.actualizar_visual()
+	
 	for campo in documento.tipo.campos:
-		var valor = obtener_valor_campo(campo)
+		var valor = _resolver_valor_campo(campo)
 		crear_campo(campo,valor)
+		
+func _resolver_valor_campo(campo: CampoDocumento):
+	# TEMPLATE
+	if campo.fuente == CampoDocumento.FuenteCampo.TEMPLATE:
+		
+		var group_id = documento.tipo.template_id
+		var template_group = DatabaseTemplatesDocumentos.templates.get(group_id, {})
+		var template = template_group.get(campo.template_parrafo, "")
+		if template == "":
+			push_warning("Template no encontrado: %s -> %s" % [group_id, campo.template_parrafo])
+		var style = DatabaseTemplatesDocumentos.styles.get(campo.color_variable, "{texto}")
+		return DocumentRenderer.render_parrafo(template, documento.metadata, style)
+	
+	
+	if campo.id == "historial":
+		var texto := ""
+		
+		for item in documento.metadata.get("historial", []):
+			texto += "%s - %s\n " % [ item.get("fecha", ""),item.get("motivo", "")]
+		return texto
+	
+	return documento.metadata.get(campo.id, campo.texto_default)
+	
+
+	
+	
 	
 func crear_campo(campo: CampoDocumento, valor):
-	var label = Label.new()
-	label.position = campo.posicion
-	label.size = campo.size
-	label.autowrap_mode= TextServer.AUTOWRAP_WORD
-	label.text = str(valor)
-	label.add_theme_color_override("font_color", campo.color)
-	capa_campos.add_child(label)
+	var control: Control
+	if campo.id == "motivo_evento":
+		print("--- VALOR AL ENTRAR A CREAR CAMPO ", valor)
+	if campo.bbcode_activo:
+		var richlabel = RichTextLabel.new()
+		richlabel.bbcode_enabled = true
+		control = richlabel
+		control.add_theme_font_size_override("normal_font_size",campo.font_size)
+		control.add_theme_font_size_override("Normal_Font_Size",campo.font_size)
+		control.add_theme_color_override("default_color", campo.color)
+		control.text = str(valor)
+	else:
+		var label = Label.new()
+		control = label
+		control.text = str(valor)
+		if campo.id == "motivo_evento":
+			print("TEXTO LABEL CREADO DESDE EL LABEL",control.text)
+		control.horizontal_alignment = campo.alineacion_horizontal
+		control.vertical_alignment = campo.alineacion_vertical
+	
+	control.position = campo.posicion
+	control.custom_minimum_size = campo.size
+	control.size = campo.size
+	control.add_theme_font_size_override("font_size",campo.font_size)
+	control.add_theme_color_override("font_color", campo.color)
+
+	control.autowrap_mode = TextServer.AUTOWRAP_ARBITRARY
+	capa_campos.add_child(control)
+
 
 func obtener_valor_campo( campo : CampoDocumento):
 	return documento.metadata.get(campo.id,campo.texto_default)

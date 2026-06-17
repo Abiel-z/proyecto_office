@@ -5,17 +5,55 @@ class_name Trabajador
 @export var nombre: String
 @export var cargo: String
 @export var documentos: Array = []
-@export var fecha_ingreso: String
 @export var activo: bool = true
 
-static func nuevo(id: int, nombre: String, cargo: String) -> Trabajador:
+var eventos = {
+	"EVENTO_CONDUCTUAL": [],
+	"EVENTO_MEDICO": [],
+	"EVENTO_CONTINUIDAD": []
+}
+
+# identificación
+var rut : String
+var fecha_nacimiento : String
+var nivel_operativo : String
+var fecha_ingreso: String
+var area_trabajo : String
+var direccion : String
+var nacionalidad : String
+
+# médico
+var grupo_sanguineo : String
+var apto_medicamente : bool
+
+# conductual
+var amonestaciones : int
+
+# continuidad
+var antiguedad : int
+var evaluacion : int
+
+
+
+
+static func nuevo(
+	id: int, nombre: String, cargo: String, rut : String,
+	fecha_ingreso : String, area_trabajo : String, nivel_operativo: String,
+	direccion : String
+	) -> Trabajador:
+	
 	var t = Trabajador.new()
 	t.id = id
+	t.rut = rut
 	t.nombre = nombre
+	t.fecha_ingreso = fecha_ingreso
+	t.area_trabajo = area_trabajo
+	t.nivel_operativo = nivel_operativo
+	t.direccion = direccion
 	t.cargo = cargo
 	t.fecha_ingreso = Time.get_date_string_from_system()
 	t.activo = true
-	t.asignar_documentos(DatabaseTrabajadores.obtener_documentos_de_cargo(cargo))
+	#t.asignar_documentos(DatabaseTrabajadores.obtener_documentos_de_cargo(cargo))
 	return t
 
 func asignar_documentos(docs: Array):

@@ -1,12 +1,19 @@
-[gd_resource type="Resource" script_class="TipoDocumento" load_steps=3 format=3 uid="uid://kb3llxo5efhu"]
+[gd_resource type="Resource" script_class="TipoDocumento" load_steps=6 format=3 uid="uid://kb3llxo5efhu"]
 
+[ext_resource type="Texture2D" uid="uid://y6ugabek3x8l" path="res://aseprite/doc_conductual/DETALLES-FONDO.png" id="1_m5q5y"]
 [ext_resource type="Script" path="res://gd/TipoDocumento.gd" id="1_pmaks"]
 [ext_resource type="Texture2D" uid="uid://bagyf3ia7klmy" path="res://aseprite/margenes_hojas/mascara_zigzag.png" id="1_x5s2h"]
+[ext_resource type="Texture2D" uid="uid://cidxe3epai8ql" path="res://aseprite/margenes_hojas/REVISION/mascara_revision.png" id="3_bk6b8"]
+[ext_resource type="Texture2D" uid="uid://bh67l7vpujroh" path="res://aseprite/doc_conductual/TEXTOS-FIJOS.png" id="4_8xup1"]
 
 [resource]
 script = ExtResource("1_pmaks")
 id = "SALUD"
+textura_base = ExtResource("3_bk6b8")
 mascara_borde = ExtResource("1_x5s2h")
+textos_fijos = ExtResource("4_8xup1")
+detalles_fondo = ExtResource("1_m5q5y")
+campos = Array[Resource("res://gd/Campo documento/campo_documento.gd")]([])
 color_papel = Color(0.965957, 0.943804, 0.715446, 1)
 tipo_timbre = ""
 posiciones_timbres = Array[Vector2]([])

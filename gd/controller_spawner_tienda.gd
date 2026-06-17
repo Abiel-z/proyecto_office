@@ -44,10 +44,3 @@ func spawnear_objeto(id_objeto : String, cantidad : int):
 		scene.add_child(obj)
 
 		obj.global_position = spawn.global_position
-
-		print(
-			"Spawn:",
-			obj.name,
-			" -> ",
-			obj.global_position
-		)

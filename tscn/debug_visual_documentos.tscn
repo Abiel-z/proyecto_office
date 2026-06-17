@@ -1,0 +1,94 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmu1y0b3fox5j"]
+
+[ext_resource type="Script" path="res://gd/ControlDebugDocumentos.gd" id="1_5f7cx"]
+[ext_resource type="Resource" uid="uid://cyigvkdawgjhw" path="res://tres/Tipo_Documento/InformeConductual.tres" id="2_7n0w7"]
+[ext_resource type="Texture2D" uid="uid://beb2xeksxnb1c" path="res://aseprite/doc_conductual/BASE.png" id="3_yxfp6"]
+[ext_resource type="Script" path="res://gd/dibujos_dinamicos.gd" id="4_gp8h3"]
+[ext_resource type="Texture2D" uid="uid://bh67l7vpujroh" path="res://aseprite/doc_conductual/TEXTOS-FIJOS.png" id="4_lfvum"]
+[ext_resource type="Texture2D" uid="uid://y6ugabek3x8l" path="res://aseprite/doc_conductual/DETALLES-FONDO.png" id="5_rl6le"]
+
+[node name="Textura_final" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_5f7cx")
+tiempo_actualizacion = 2.66688
+actualizando = true
+documento_metadata = {
+"area_trabajo": "Desarrollo",
+"cargo": "Laucha Jefe",
+"direccion": "Las Alcantarillas, Ratonia",
+"direccion_empresa": "Peyehue, Quesington",
+"fecha_evento": "XX - XX - XXXX",
+"fecha_ingreso": "28-06-1998",
+"gravedad_evento": "2",
+"motivo_evento": "LLEGADA TARDE",
+"nivel_operativo": "VIII",
+"nombre": "Laucha Consarna",
+"nombre_empresa": "Valvula",
+"resultado_evento": "AMONESTACION",
+"rut_empresa": "9999 - 9",
+"rut_id": "7409 - 4",
+"tipo_evento": "AMONESTACION"
+}
+tipo_documento = ExtResource("2_7n0w7")
+
+[node name="textura_final" type="Sprite2D" parent="."]
+
+[node name="DebugVisualDocumentos" type="SubViewport" parent="."]
+size = Vector2i(375, 585)
+render_target_update_mode = 4
+
+[node name="ControlVisualDocumentos" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="base" type="TextureRect" parent="ControlVisualDocumentos"]
+layout_mode = 0
+offset_right = 385.0
+offset_bottom = 575.0
+texture = ExtResource("3_yxfp6")
+
+[node name="textos_fijos" type="TextureRect" parent="ControlVisualDocumentos"]
+layout_mode = 0
+texture = ExtResource("4_lfvum")
+
+[node name="detalles_fondo" type="TextureRect" parent="ControlVisualDocumentos"]
+layout_mode = 0
+texture = ExtResource("5_rl6le")
+
+[node name="textos_dinamicos" type="Control" parent="ControlVisualDocumentos"]
+anchors_preset = 0
+
+[node name="dibujos_dinamicos" type="Control" parent="ControlVisualDocumentos"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_gp8h3")
+
+[node name="Label" type="Label" parent="ControlVisualDocumentos"]
+visible = false
+layout_mode = 0
+offset_left = 19.0
+offset_top = 186.0
+offset_right = 361.0
+offset_bottom = 331.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "El trabajador declara conocer y aceptar que, durante el desempeño de sus funciones, podrá acceder a información operativa, administrativa, técnica o estratégica perteneciente a la organización. Dicha información deberá ser utilizada exclusivamente para el cumplimiento de las labores asignadas y no podrá ser divulgada, reproducida o compartida con terceros sin autorización expresa."
+autowrap_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 19.0
+offset_top = 370.0
+offset_right = 359.0
+offset_bottom = 483.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 15
+text = "La entidad {id :\"\"}, identificada bajo el registro {id:\"\"}, con domicilio administrativo en {id:\"\"}, actuará en calidad de empleador para todos los efectos legales y operativos correspondientes. La organización mantendrá la facultad de asignar funciones, recursos y responsabilidades conforme a las necesidades institucionales vigentes.
+templates_cargadas"
+fit_content = true
