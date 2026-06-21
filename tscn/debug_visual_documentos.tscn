@@ -1,18 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://dmu1y0b3fox5j"]
+[gd_scene load_steps=5 format=3 uid="uid://dmu1y0b3fox5j"]
 
 [ext_resource type="Script" path="res://gd/ControlDebugDocumentos.gd" id="1_5f7cx"]
-[ext_resource type="Resource" uid="uid://cyigvkdawgjhw" path="res://tres/Tipo_Documento/InformeConductual.tres" id="2_7n0w7"]
-[ext_resource type="Texture2D" uid="uid://beb2xeksxnb1c" path="res://aseprite/doc_conductual/BASE.png" id="3_yxfp6"]
+[ext_resource type="Resource" uid="uid://b575fp611n0a8" path="res://tres/Tipo_Documento/TipoPagina/portada_contrato.tres" id="2_bh0ef"]
+[ext_resource type="Texture2D" uid="uid://blblkpo3nm7hg" path="res://aseprite/contrato/base.png" id="3_goe4q"]
 [ext_resource type="Script" path="res://gd/dibujos_dinamicos.gd" id="4_gp8h3"]
-[ext_resource type="Texture2D" uid="uid://bh67l7vpujroh" path="res://aseprite/doc_conductual/TEXTOS-FIJOS.png" id="4_lfvum"]
-[ext_resource type="Texture2D" uid="uid://y6ugabek3x8l" path="res://aseprite/doc_conductual/DETALLES-FONDO.png" id="5_rl6le"]
 
 [node name="Textura_final" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_5f7cx")
-tiempo_actualizacion = 2.66688
-actualizando = true
+tiempo_actualizacion = 0.307273
+intervalo_actualizacion = 1.0
 documento_metadata = {
 "area_trabajo": "Desarrollo",
 "cargo": "Laucha Jefe",
@@ -30,7 +28,7 @@ documento_metadata = {
 "rut_id": "7409 - 4",
 "tipo_evento": "AMONESTACION"
 }
-tipo_documento = ExtResource("2_7n0w7")
+tipo_documento = ExtResource("2_bh0ef")
 
 [node name="textura_final" type="Sprite2D" parent="."]
 
@@ -50,15 +48,13 @@ grow_vertical = 2
 layout_mode = 0
 offset_right = 385.0
 offset_bottom = 575.0
-texture = ExtResource("3_yxfp6")
+texture = ExtResource("3_goe4q")
 
 [node name="textos_fijos" type="TextureRect" parent="ControlVisualDocumentos"]
 layout_mode = 0
-texture = ExtResource("4_lfvum")
 
 [node name="detalles_fondo" type="TextureRect" parent="ControlVisualDocumentos"]
 layout_mode = 0
-texture = ExtResource("5_rl6le")
 
 [node name="textos_dinamicos" type="Control" parent="ControlVisualDocumentos"]
 anchors_preset = 0

@@ -15,6 +15,11 @@ func get_hojas():
 
 @export var owner_id : int
 @export var subject_id : int
+
+@export var owner : Trabajador
+@export var subject : Trabajador
+
+
 @export var contexto : String
 
 @export var estado : String = "activo"

@@ -179,6 +179,7 @@ id = "ANEXO_CONFIDENCIALIDAD"
 template_id = "anexo_conf"
 textura_base = ExtResource("5_dxysa")
 mascara_borde = ExtResource("2_stx0b")
+imagenes = Array[Resource("res://gd/imagen_documento.gd")]([])
 campos = Array[ExtResource("1_mo6os")]([SubResource("Resource_08qwv"), SubResource("Resource_5vv0f"), SubResource("Resource_v2mb6"), SubResource("Resource_2mc7c"), SubResource("Resource_qrr4c"), SubResource("Resource_txpaw"), SubResource("Resource_0ua2r"), SubResource("Resource_f4rwv")])
 dibujos = Array[Resource("res://gd/dibujo_documento.gd")]([])
 color_papel = Color(0, 0, 0, 1)

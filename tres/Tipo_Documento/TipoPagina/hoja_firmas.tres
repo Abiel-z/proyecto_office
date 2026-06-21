@@ -137,6 +137,7 @@ id = "HOJA_FIRMAS"
 template_id = "hoja_firmas"
 textura_base = ExtResource("5_s6qwg")
 mascara_borde = ExtResource("2_nxl4o")
+imagenes = Array[Resource("res://gd/imagen_documento.gd")]([])
 campos = Array[ExtResource("1_3b5x3")]([SubResource("Resource_b80dc"), SubResource("Resource_2cqyf"), SubResource("Resource_2jrce"), SubResource("Resource_c5okq"), SubResource("Resource_bgnuq"), SubResource("Resource_cli47")])
 dibujos = Array[Resource("res://gd/dibujo_documento.gd")]([])
 color_papel = Color(0, 0, 0, 1)

@@ -165,6 +165,7 @@ script = ExtResource("1_58t2p")
 id = "INFORME_INCIDENTE"
 template_id = "informe_incidente"
 textura_base = ExtResource("3_ow85r")
+imagenes = Array[Resource("res://gd/imagen_documento.gd")]([])
 campos = Array[ExtResource("1_x0r6b")]([SubResource("Resource_ih3ht"), SubResource("Resource_nqvw3"), SubResource("Resource_0qmc2"), SubResource("Resource_dpwwm"), SubResource("Resource_eddsm"), SubResource("Resource_ntdvh"), SubResource("Resource_ir518")])
 dibujos = Array[Resource("res://gd/dibujo_documento.gd")]([SubResource("Resource_1vlug")])
 color_papel = Color(0, 0, 0, 1)

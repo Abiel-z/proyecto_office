@@ -1,19 +1,29 @@
-[gd_resource type="Resource" script_class="TipoDocumento" load_steps=6 format=3 uid="uid://b3rucnvpbfxld"]
+[gd_resource type="Resource" script_class="TipoDocumento" load_steps=8 format=3 uid="uid://b3rucnvpbfxld"]
 
 [ext_resource type="Texture2D" uid="uid://d2vveun8mj28c" path="res://aseprite/contrato/detalles_fondo.png" id="1_a4u1g"]
 [ext_resource type="Script" path="res://gd/TipoDocumento.gd" id="1_q3dvv"]
 [ext_resource type="Texture2D" uid="uid://xm72opubj1g5" path="res://aseprite/contrato/mascara_borde.png" id="2_5i02r"]
+[ext_resource type="Script" path="res://gd/imagen_documento.gd" id="3_jc1of"]
 [ext_resource type="Texture2D" uid="uid://cgrg4k8s5eldo" path="res://aseprite/contrato/textos_fijos.png" id="4_0tyc7"]
 [ext_resource type="Texture2D" uid="uid://blblkpo3nm7hg" path="res://aseprite/contrato/base.png" id="5_ar0wn"]
+
+[sub_resource type="Resource" id="Resource_kpftp"]
+script = ExtResource("3_jc1of")
+id = "logo_empresa"
+posicion = Vector2(100, 100)
+size = Vector2(50, 50)
 
 [resource]
 script = ExtResource("1_q3dvv")
 id = "CONTRATO"
+template_id = ""
 textura_base = ExtResource("5_ar0wn")
 mascara_borde = ExtResource("2_5i02r")
 textos_fijos = ExtResource("4_0tyc7")
 detalles_fondo = ExtResource("1_a4u1g")
+imagenes = Array[ExtResource("3_jc1of")]([SubResource("Resource_kpftp")])
 campos = Array[Resource("res://gd/Campo documento/campo_documento.gd")]([])
+dibujos = Array[Resource("res://gd/dibujo_documento.gd")]([])
 color_papel = Color(1, 1, 1, 1)
 tipo_timbre = ""
 posiciones_timbres = Array[Vector2]([])

@@ -8,6 +8,7 @@ class_name TipoDocumento
 @export var textos_fijos : Texture2D
 @export var detalles_fondo : Texture2D
 
+@export var imagenes : Array[ImagenDocumento]
 @export var campos : Array[CampoDocumento]
 @export var dibujos : Array[DibujoDocumento]
 

@@ -1,60 +1,40 @@
 extends Node
 class_name GeneradorExpedientes
 
-#static func generar(trabajador: Trabajador) -> ExpedienteLaboral:
 static func generar(trabajador : Trabajador) -> ExpedienteLaboral:
 	print("GENERANDO EXPEDIENTE")
 	var expediente = ExpedienteLaboral.new()
-
 	expediente.id = trabajador.id
 	expediente.trabajador_id = trabajador.id
-
-	var contrato = DocumentoCompuesto.new()
-	contrato.id = "CONTRATO"
-	contrato.tipo = DatabaseTipoDocumento.DOCUMENTOS["CONTRATO"]
-	contrato.paginas_requeridas = DatabaseTipoDocumento.ARCHIVOS_POR_DOCUMENTO["CONTRATO"].duplicate()
-	contrato.metadata = {
-		#IDENTIFICACION TRABAJADOR
-		"nombre": trabajador.nombre,
-		"rut_id": trabajador.rut,
-		"direccion" : trabajador.direccion,
-		#POSICION EN LA EMPRESA
-		"cargo": trabajador.cargo,
-		"nivel_operativo": trabajador.nivel_operativo,
-		"fecha_ingreso": trabajador.fecha_ingreso,
-		"area_trabajo": trabajador.area_trabajo,
-		#ASIGNACION EMPRESA
-		"nombre_empresa" : "Valvula",
-		"rut_empresa" : "9999 - 9",
-		"direccion_empresa" : "Peyehue, Quesington"
-	}
-	for pagina_id in contrato.paginas_requeridas:
-		
-		#CRECION DE PAGINAS
-		var pagina = PaginaDocumento.new()
-		pagina.id = "%s_%s_%s" % [pagina_id, contrato.id, trabajador.id ]
-		pagina.documento_id = contrato.id
-		#SE TOMA EL nombre:String TIPOPAGINA Y SE BUSCA EN database_tipo_documento.gd. 
-		pagina.tipo = DatabaseTipoDocumento.DOCUMENTOS[pagina_id]
-		#TRASPSO METADATA CONTRATO -> PAGINA
-		pagina.metadata = contrato.metadata
-		contrato.agregar_pagina(pagina)
 	
+	
+	
+	# CONSTRUCCION INFORME IDENTIFICACION 
 	print("CREANDO INFRME IDENTIFICACION")
-	
 	var informe_identificacion = Informe.new()
 	informe_identificacion.tipo = DatabaseTipoDocumento.INFORMES["IDENTIFICACION"]
-	informe_identificacion.metadata = {
-	"nombre": trabajador.nombre,
-	"cargo": trabajador.cargo,
-	"rut": trabajador.rut,
-	"nivel_operativo" : trabajador.nivel_operativo,
-	"fecha_ingreso" : trabajador.fecha_ingreso,
-	"area_trabajo" : trabajador.area_trabajo
-	#"fecha_nacimiento": trabajador.fecha_nacimiento
-	}
-	informe_identificacion.documentos_requeridos.append("CONTRATO")
+	informe_identificacion.metadata = DocumentBuilder.construir_metadata_trabajador(trabajador)
+	
+	
+	print("  ------ DATOS BASE DE DATOS" ,DatabaseTipoDocumento.DOCUMENTOS_INFORMES["IDENTIFICACION"])
+	var doc_requeridos : Array = DatabaseTipoDocumento.DOCUMENTOS_INFORMES["IDENTIFICACION"]
+	print("  ------ DATOS A CARGAR" ,doc_requeridos)
+	
+	informe_identificacion.documentos_requeridos.append_array(doc_requeridos)
+	print("DATOS CARGADOS: ", informe_identificacion.documentos_requeridos)
+	
+	for documento_id in informe_identificacion.documentos_requeridos:
+		var doc = DocumentoCompuesto.new()
+		doc.id = documento_id
+		print(" --- ID DOCUMENTO : ", doc.id)
+		doc.paginas_requeridas = DatabaseTipoDocumento.ARCHIVOS_POR_DOCUMENTO[doc.id].duplicate()
+		print("PAGINAS NECESARIAS : ", doc.paginas_requeridas)
+		doc.metadata = DocumentBuilder.construir_metadata_trabajador(trabajador)
+		DocumentBuilder.construir_paginas_compuestas(doc,trabajador)
+		expediente.documentos.append(doc)
 	# FIN CONFIGURACION INFORME CONTINUIDAD
+
+
 
 	# CONFIGURACION INFORME MEDICO
 	print("CREANDO INFRME MEDICO")
@@ -74,12 +54,8 @@ static func generar(trabajador : Trabajador) -> ExpedienteLaboral:
 		expediente.documentos.append(doc)
 		informe_medico.documentos_requeridos.append(doc.id)
 	#informe_medico.documentos_requeridos.append("EXAMEN_MEDICO")
-
-	
-	
 	var informe_conductual = Informe.new()
 	var historial_conductual := []
-	
 	informe_conductual.tipo = DatabaseTipoDocumento.INFORMES["CONDUCTUAL"]
 	informe_conductual.metadata = {
 		"nombre": trabajador.nombre,
@@ -112,7 +88,7 @@ static func generar(trabajador : Trabajador) -> ExpedienteLaboral:
 			"fecha_ingreso": trabajador.fecha_ingreso,
 			"area_trabajo": trabajador.area_trabajo,
 	
-			"nombre_empresa": "Valvula",
+			"nombre_empresa": trabajador.empresa.nombre,
 			"rut_empresa": "9999 - 9",
 			"direccion_empresa": "Peyehue, Quesington",
 	
@@ -130,6 +106,7 @@ static func generar(trabajador : Trabajador) -> ExpedienteLaboral:
 				trabajador.id
 			]
 			pagina.documento_id = incidente.id
+			#pagina.subject_id = incidente.trabajador
 			pagina.tipo = DatabaseTipoDocumento.DOCUMENTOS[pagina_id]
 			pagina.metadata = incidente.metadata
 			incidente.agregar_pagina(pagina)
@@ -179,7 +156,7 @@ static func generar(trabajador : Trabajador) -> ExpedienteLaboral:
 	# GUARDAR
 	# -------------------------
 
-	expediente.documentos.append(contrato)
+	#expediente.documentos.append(contrato)
 	#expediente.documentos.append(examen_medico)
 	#expediente.documentos.append(ascenso)
 

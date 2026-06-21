@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://blwsdggn7c7ci"]
+
+[ext_resource type="PackedScene" uid="uid://ddibr07fl5tn3" path="res://tscn/escena.tscn" id="1_f5pmr"]
+[ext_resource type="PackedScene" uid="uid://dlrlta1etqikx" path="res://tscn/estacion_compra_v_2.tscn" id="2_qetcq"]
+
+[sub_resource type="Environment" id="Environment_lu022"]
+background_energy_multiplier = 0.0
+
+[node name="world" type="Node3D"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.682373, 3.50342, -3.43417)
+omni_range = 4.801
+omni_attenuation = 0.732043
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lu022")
+
+[node name="escena" parent="." instance=ExtResource("1_f5pmr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51374, 0, 2.52994)
+
+[node name="estacion_compra_v2" parent="." instance=ExtResource("2_qetcq")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0629082, 1.90227, -0.533174)

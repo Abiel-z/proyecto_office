@@ -11,6 +11,7 @@ func cargar_trabajadores_iniciales():
 		1,
 		"Ana Ramírez",
 		"Electricista",
+		DatabaseEmpresas.EMPRESAS.VALVULA,
 		"9999-0",
 		"12-03-2004",
 		"Mantenimiento",

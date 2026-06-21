@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://cpm85fmv03y7h"]
 
-[ext_resource type="Script" path="res://punto_entrega.gd" id="1_n2jdp"]
+[ext_resource type="Script" path="res://gd/punto_entrega.gd" id="1_n2jdp"]
 [ext_resource type="Script" path="res://gd/mango_punto_entrega.gd" id="2_th7xm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p4csp"]

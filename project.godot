@@ -28,6 +28,7 @@ ControllerSpawnerTienda="*res://gd/controller_spawner_tienda.gd"
 DatabaseExpedientes="*res://gd/database_expedientes.gd"
 DatabaseTipoDocumento="*res://gd/database_tipo_documento.gd"
 TemplatesDocumentosDb="*res://templates_documentos_db.gd"
+DatabaseEmpresas="*res://gd/database_empresas.gd"
 
 [display]
 

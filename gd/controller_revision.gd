@@ -61,7 +61,7 @@ func calcular_puntaje( hojas:Array ) -> Dictionary:
 	var bonos := []
 	# BONUS TIMBRADO
 	var todas_timbradas := true
-	
+	#
 	for hoja in hojas:
 		if hoja.estado_documento != Hoja.EstadoDocumento.TIMBRADO:
 			todas_timbradas = false

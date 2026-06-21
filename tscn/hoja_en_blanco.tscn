@@ -7,9 +7,9 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mdbhs"]
 friction = 1.5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k85ov"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eqk52"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_e7687"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_e33wq"]
 _surfaces = [{
 "aabb": AABB(0, 0, -0.172977, 1e-05, 0.517681, 0.345964),
 "format": 34896613377,
@@ -22,7 +22,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_xyrby"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_sjec3"]
 resource_name = "hoja_blanca_Cube_003"
 _surfaces = [{
 "aabb": AABB(0, 0, -0.172977, 1e-05, 0.517681, 0.345964),
@@ -30,14 +30,14 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 6,
 "index_data": PackedByteArray(2, 0, 1, 0, 3, 0, 2, 0, 0, 0, 1, 0),
-"material": SubResource("StandardMaterial3D_k85ov"),
+"material": SubResource("StandardMaterial3D_eqk52"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 4,
 "vertex_data": PackedByteArray(0, 0, 0, 0, 253, 255, 0, 0, 0, 0, 255, 255, 253, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_e7687")
+shadow_mesh = SubResource("ArrayMesh_e33wq")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uspfd"]
 size = Vector3(0.339, 0.0358322, 0.504431)
@@ -96,6 +96,11 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("3_6uvnv")
 
+[node name="imagenes_dinamicas" type="Control" parent="SubViewport/Control"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="MarginContainer" type="MarginContainer" parent="SubViewport/Control"]
 layout_mode = 1
 anchors_preset = -1
@@ -130,15 +135,13 @@ text = "1/1"
 [node name="VisualPivot" type="Node3D" parent="."]
 
 [node name="model" type="MeshInstance3D" parent="VisualPivot"]
-transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, -0.266977)
-gi_mode = 0
-mesh = SubResource("ArrayMesh_xyrby")
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, -0.267)
+mesh = SubResource("ArrayMesh_sjec3")
 skeleton = NodePath("")
 
 [node name="FONDO" type="MeshInstance3D" parent="VisualPivot"]
-transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0.000513278, -0.266977)
-gi_mode = 0
-mesh = SubResource("ArrayMesh_xyrby")
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, -0.001, -0.267)
+mesh = SubResource("ArrayMesh_sjec3")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

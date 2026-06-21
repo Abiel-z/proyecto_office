@@ -3,6 +3,7 @@ class_name Trabajador
 
 @export var id : int
 @export var nombre: String
+@export var empresa : Empresa
 @export var cargo: String
 @export var documentos: Array = []
 @export var activo: bool = true
@@ -37,7 +38,7 @@ var evaluacion : int
 
 
 static func nuevo(
-	id: int, nombre: String, cargo: String, rut : String,
+	id: int, nombre: String, cargo: String, empresa: Empresa, rut : String,
 	fecha_ingreso : String, area_trabajo : String, nivel_operativo: String,
 	direccion : String
 	) -> Trabajador:
@@ -46,6 +47,7 @@ static func nuevo(
 	t.id = id
 	t.rut = rut
 	t.nombre = nombre
+	t.empresa = empresa
 	t.fecha_ingreso = fecha_ingreso
 	t.area_trabajo = area_trabajo
 	t.nivel_operativo = nivel_operativo

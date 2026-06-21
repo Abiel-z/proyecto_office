@@ -22,6 +22,10 @@ const DOCUMENTOS = {
 	"PORTADA_INFORME_INCIDENTE" : preload("res://tres/Tipo_Documento/TipoPagina/portada_informe_incidente.tres")
 }
 
+const DOCUMENTOS_INFORMES := {
+		"IDENTIFICACION" : ["CONTRATO"]
+}
+
 const ARCHIVOS_POR_DOCUMENTO = {
 	"CONTRATO": [
 		"PORTADA_CONTRATO",
