@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dmu1y0b3fox5j"]
 
 [ext_resource type="Script" path="res://gd/ControlDebugDocumentos.gd" id="1_5f7cx"]
-[ext_resource type="Resource" uid="uid://b575fp611n0a8" path="res://tres/Tipo_Documento/TipoPagina/portada_contrato.tres" id="2_bh0ef"]
+[ext_resource type="Resource" uid="uid://csrt6g240p3j5" path="res://tres/Tipo_Documento/TipoPagina/hoja_firmas.tres" id="2_x4aun"]
 [ext_resource type="Texture2D" uid="uid://blblkpo3nm7hg" path="res://aseprite/contrato/base.png" id="3_goe4q"]
 [ext_resource type="Script" path="res://gd/dibujos_dinamicos.gd" id="4_gp8h3"]
 
@@ -9,8 +9,8 @@
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_5f7cx")
-tiempo_actualizacion = 0.307273
-intervalo_actualizacion = 1.0
+tiempo_actualizacion = 2.25893
+actualizando = true
 documento_metadata = {
 "area_trabajo": "Desarrollo",
 "cargo": "Laucha Jefe",
@@ -28,7 +28,7 @@ documento_metadata = {
 "rut_id": "7409 - 4",
 "tipo_evento": "AMONESTACION"
 }
-tipo_documento = ExtResource("2_bh0ef")
+tipo_documento = ExtResource("2_x4aun")
 
 [node name="textura_final" type="Sprite2D" parent="."]
 

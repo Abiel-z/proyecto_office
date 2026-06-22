@@ -1,12 +1,15 @@
-[gd_resource type="Resource" script_class="Empresa" load_steps=3 format=3 uid="uid://d2ja3q370co0w"]
+[gd_resource type="Resource" script_class="Empresa" load_steps=4 format=3 uid="uid://d2ja3q370co0w"]
 
 [ext_resource type="Script" path="res://gd/Empresa.gd" id="1_2na50"]
-[ext_resource type="Texture2D" uid="uid://bpc5qjka6jxbx" path="res://tres/Empresas/logo_test_1.png" id="1_apob0"]
+[ext_resource type="Texture2D" uid="uid://b358rdmy3psm1" path="res://aseprite/Empresas/test1/firma_test.png" id="1_lbl3h"]
+[ext_resource type="Texture2D" uid="uid://bouh2f1d7rjn7" path="res://aseprite/Empresas/test1/logo_test_1.png" id="2_fv0rr"]
 
 [resource]
 script = ExtResource("1_2na50")
 id = "VALVULA"
-nombre = "TEST NOMBRE EMPRESA"
+nombre = "Si este nombre cambia está bien conectado"
 rut = "1234 - 5"
 direccion = "Los Lauchones #37"
-logo_empresa = ExtResource("1_apob0")
+logo_empresa = ExtResource("2_fv0rr")
+timbre_empresa = ExtResource("2_fv0rr")
+firma = ExtResource("1_lbl3h")

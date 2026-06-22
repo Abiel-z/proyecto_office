@@ -7,6 +7,7 @@ class_name  Empresa
 @export var direccion : String
 @export var logo_empresa:  Texture2D
 @export var timbre_empresa:  Texture2D
+@export var firma : Texture2D
 
 var trabajadores : Array[Trabajador] = []
 

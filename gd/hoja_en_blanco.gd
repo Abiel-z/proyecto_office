@@ -124,16 +124,21 @@ func actualizar_visual():
 	detalles_fondo.texture = documento.tipo.detalles_fondo
 	textos_fijos.texture = documento.tipo.textos_fijos
 	label_texto.text = documento.cuerpo
-	#limpiar_campos()
 	
-	#for imagen in documento.tipo.imagenes:
-		#var texture_rect := TextureRect.new()
-		#match imagen.id:
-			#"logo": texture_rect.texture = documento.subject_id.empresa.logo_empresa
-			#"timbre" : texture_rect.texture = documento.subject_id.empresa.timbre_empresa
-		#texture_rect.texture = imagen.textura
-		#texture_rect.position = imagen.posicion
-		#texture_rect.size = imagen.size
+	if documento.tipo.imagenes.size() >= 1:
+		for imagen in documento.tipo.imagenes:
+			print("CONFIGURANDO IMAGEN")
+			var trab := DatabaseTrabajadores.get_trabajador(documento.subject_id)
+			var texture_rect := TextureRect.new()
+			match imagen.id:
+				"logo": texture_rect.texture = trab.empresa.logo_empresa
+				"timbre" : texture_rect.texture = trab.empresa.timbre_empresa
+			print("CONFIGURANDO ", imagen.id)
+			
+			#texture_rect.texture = imagen.textura
+			texture_rect.position = imagen.posicion
+			texture_rect.size = imagen.size
+			capa_dibujos.add_child(texture_rect)
 		
 	if capa_dibujos:
 		capa_dibujos.dibujos = documento.tipo.dibujos

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="TipoDocumento" load_steps=11 format=3 uid="uid://csrt6g240p3j5"]
+[gd_resource type="Resource" script_class="TipoDocumento" load_steps=16 format=3 uid="uid://csrt6g240p3j5"]
 
 [ext_resource type="Script" path="res://gd/Campo documento/campo_documento.gd" id="1_3b5x3"]
 [ext_resource type="Script" path="res://gd/TipoDocumento.gd" id="1_jkn6e"]
+[ext_resource type="Script" path="res://gd/imagen_documento.gd" id="2_jhp8a"]
 [ext_resource type="Texture2D" uid="uid://xm72opubj1g5" path="res://aseprite/contrato/mascara_borde.png" id="2_nxl4o"]
 [ext_resource type="Texture2D" uid="uid://blblkpo3nm7hg" path="res://aseprite/contrato/base.png" id="5_s6qwg"]
 
@@ -10,7 +11,7 @@ script = ExtResource("1_3b5x3")
 id = "parrafo_1"
 fuente = 1
 template_parrafo = "parrafo_1"
-posicion = Vector2(20, 50)
+posicion = Vector2(20, 140)
 color = Color(0, 0, 0, 1)
 color_variable = "roja"
 texto_default = ""
@@ -31,7 +32,7 @@ script = ExtResource("1_3b5x3")
 id = "parrafo_2"
 fuente = 1
 template_parrafo = "parrafo_2"
-posicion = Vector2(20, 120)
+posicion = Vector2(20, 200)
 color = Color(0, 0, 0, 1)
 color_variable = "roja"
 texto_default = ""
@@ -52,7 +53,7 @@ script = ExtResource("1_3b5x3")
 id = "parrafo_3"
 fuente = 1
 template_parrafo = "parrafo_3"
-posicion = Vector2(20, 190)
+posicion = Vector2(20, 270)
 color = Color(0, 0, 0, 1)
 color_variable = "roja"
 texto_default = ""
@@ -73,7 +74,7 @@ script = ExtResource("1_3b5x3")
 id = "parrafo_4"
 fuente = 1
 template_parrafo = "parrafo_4"
-posicion = Vector2(20, 240)
+posicion = Vector2(20, 320)
 color = Color(0, 0, 0, 1)
 color_variable = "roja"
 texto_default = ""
@@ -131,13 +132,37 @@ alineacion_horizontal = 0
 alineacion_vertical = 0
 autowrap = true
 
+[sub_resource type="Resource" id="Resource_gd1e1"]
+script = ExtResource("2_jhp8a")
+id = "logo"
+posicion = Vector2(250, 10)
+size = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_fsgg3"]
+script = ExtResource("2_jhp8a")
+id = "timbre"
+posicion = Vector2(200, 350)
+size = Vector2(150, 150)
+
+[sub_resource type="Resource" id="Resource_j0mim"]
+script = ExtResource("2_jhp8a")
+id = "firma_subject"
+posicion = Vector2(20, 450)
+size = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_a2hsn"]
+script = ExtResource("2_jhp8a")
+id = "firma_owner"
+posicion = Vector2(250, 450)
+size = Vector2(0, 0)
+
 [resource]
 script = ExtResource("1_jkn6e")
 id = "HOJA_FIRMAS"
 template_id = "hoja_firmas"
 textura_base = ExtResource("5_s6qwg")
 mascara_borde = ExtResource("2_nxl4o")
-imagenes = Array[Resource("res://gd/imagen_documento.gd")]([])
+imagenes = Array[ExtResource("2_jhp8a")]([SubResource("Resource_gd1e1"), SubResource("Resource_fsgg3"), SubResource("Resource_j0mim"), SubResource("Resource_a2hsn")])
 campos = Array[ExtResource("1_3b5x3")]([SubResource("Resource_b80dc"), SubResource("Resource_2cqyf"), SubResource("Resource_2jrce"), SubResource("Resource_c5okq"), SubResource("Resource_bgnuq"), SubResource("Resource_cli47")])
 dibujos = Array[Resource("res://gd/dibujo_documento.gd")]([])
 color_papel = Color(0, 0, 0, 1)

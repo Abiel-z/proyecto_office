@@ -140,7 +140,7 @@ mesh = SubResource("ArrayMesh_sjec3")
 skeleton = NodePath("")
 
 [node name="FONDO" type="MeshInstance3D" parent="VisualPivot"]
-transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, -0.001, -0.267)
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0.001, -0.267)
 mesh = SubResource("ArrayMesh_sjec3")
 skeleton = NodePath("")
 

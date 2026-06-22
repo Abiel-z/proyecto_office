@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpc5qjka6jxbx"
-path="res://.godot/imported/logo_test_1.png-f6cf776c1f325ec0b257b3b9c48d8979.ctex"
+uid="uid://b358rdmy3psm1"
+path="res://.godot/imported/firma_test.png-cc4901a59a2a3d41feda29c1a6061dd1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tres/Empresas/logo_test_1.png"
-dest_files=["res://.godot/imported/logo_test_1.png-f6cf776c1f325ec0b257b3b9c48d8979.ctex"]
+source_file="res://aseprite/Empresas/test1/firma_test.png"
+dest_files=["res://.godot/imported/firma_test.png-cc4901a59a2a3d41feda29c1a6061dd1.ctex"]
 
 [params]
 

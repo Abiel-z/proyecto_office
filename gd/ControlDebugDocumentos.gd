@@ -6,11 +6,12 @@ var textura_base : TextureRect
 var detalles_fondo : TextureRect
 var textos_fijos : TextureRect
 var capa_campos : Control
-@onready var capa_dibujos : Control
+var capa_dibujos : Control
 @export var tiempo_actualizacion := 0.0
 @export var intervalo_actualizacion := 5.0
 @export var actualizando := false
 const bd = preload("res://gd/database_templates_documentos.gd")
+const bd_trabajadores = preload("res://gd/database_trabajadores.gd")
 
 
 
@@ -42,6 +43,12 @@ func limpiar_campos():
 	if capa_campos == null:
 		return
 	for hijo in capa_campos.get_children():
+		hijo.queue_free()
+
+func limpiar_dibujos():
+	if capa_dibujos == null:
+		return
+	for hijo in capa_dibujos.get_children():
 		hijo.queue_free()
 
 func actualizar_metadata():
@@ -110,12 +117,26 @@ func actualizar_visual():
 		return
 
 	limpiar_campos()
+	limpiar_dibujos()
+	
+	if tipo_documento.imagenes.size() >= 1:
+		var empresa_debug : Empresa = DatabaseEmpresas.EMPRESAS.VALVULA
+		for imagen in tipo_documento.imagenes:
+			var texture_rect := TextureRect.new()
+			match imagen.id:
+				"logo": texture_rect.texture = empresa_debug.logo_empresa
+				"timbre" : texture_rect.texture = empresa_debug.timbre_empresa
+				"firma_subject" : texture_rect.texture = empresa_debug.firma
+				"firma_owner" :  texture_rect.texture = empresa_debug.firma
+			print("CONFIGURANDO ", imagen.id)
+			
+			#texture_rect.texture = imagen.textura
+			texture_rect.position = imagen.posicion
+			texture_rect.size = imagen.size
+			capa_dibujos.add_child(texture_rect)
+
 	
 	if capa_dibujos:
-		print(" --- ACTUALIZANDO CAPA DIBUJOS")
-		print(capa_dibujos)
-		print(capa_dibujos.get_script())
-		print(capa_dibujos.has_method("actualizar_visual"))
 		capa_dibujos.dibujos = tipo_documento.dibujos
 		capa_dibujos.call_deferred("actualizar_visual")
 	

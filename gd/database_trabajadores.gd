@@ -1,6 +1,6 @@
 extends Node
 
-var trabajadores : Array[Trabajador] = []
+static var trabajadores : Array[Trabajador] = []
 
 # --- FUNCIONES DE EJECUCION ---
 func _ready():
@@ -8,7 +8,7 @@ func _ready():
 # --- FUNCIONES DE EJECUCION ---
 func cargar_trabajadores_iniciales():
 	var ana = Trabajador.nuevo(
-		1,
+		0,
 		"Ana Ramírez",
 		"Electricista",
 		DatabaseEmpresas.EMPRESAS.VALVULA,
@@ -72,12 +72,10 @@ func cargar_trabajadores_iniciales():
 		#Trabajador.nuevo(3, "Lucía Fernández", "ABOGADO", "1298 - 2", "16 - 04 - 2000" , "Administracion" , "V" ),
 	#]
 
-func get_trabajador(id : int) -> Trabajador:
+static func get_trabajador(id : int) -> Trabajador:
 	if id >= 0 and id < trabajadores.size():
 		return trabajadores[id]
 	return null
-	
-	return
 
 func get_trabajadores() -> Array[Trabajador]:
 	return trabajadores
