@@ -11,6 +11,31 @@ class_name  Empresa
 
 var trabajadores : Array[Trabajador] = []
 
+var organigrama := {
+
+	"DIRECCION": {
+		"CEO": null
+	},
+
+	"GERENCIA": {
+		"GENERAL": null,
+		"MEDICA": null,
+		"OPERACIONES": null,
+		"PERSONAS": null
+	},
+
+	"OPERACIONES": {
+		"SUPERVISORES": [],
+		"TECNICOS": [],
+		"OPERARIOS": []
+	},
+
+	"SEGURIDAD": {
+		"GUARDIAS": []
+	}
+}
+
+
 func agregar_trabajador(trabajador: Trabajador):
 	if trabajador in trabajadores:
 		return

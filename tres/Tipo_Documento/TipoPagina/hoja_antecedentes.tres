@@ -1,0 +1,371 @@
+[gd_resource type="Resource" script_class="TipoDocumento" load_steps=24 format=3 uid="uid://c3tcgk2o8njt1"]
+
+[ext_resource type="Script" path="res://gd/TipoDocumento.gd" id="1_j7ubt"]
+[ext_resource type="Script" path="res://gd/Campo documento/campo_documento.gd" id="1_tb5k0"]
+[ext_resource type="Script" path="res://gd/rectangulo_dibujo.gd" id="2_cbill"]
+[ext_resource type="Script" path="res://gd/imagen_documento.gd" id="2_t6b4u"]
+[ext_resource type="Texture2D" uid="uid://blblkpo3nm7hg" path="res://aseprite/contrato/base.png" id="3_xqmsd"]
+
+[sub_resource type="Resource" id="Resource_jaxxe"]
+script = ExtResource("1_tb5k0")
+id = "titulo_1"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(0, 50)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = "ANTECEDENTES"
+size = Vector2(375, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 1
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_iub4p"]
+script = ExtResource("1_tb5k0")
+id = "txt_nombre_trabajador"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(15, 140)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = "Nombre trabajador  :"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 10.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_ao0ma"]
+script = ExtResource("1_tb5k0")
+id = "txt_cargo"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(15, 160)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = "Cargo  :"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 10.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_66a0c"]
+script = ExtResource("1_tb5k0")
+id = "txt_departamento"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(15, 180)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = "Departamento  :"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 10.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_hfe3k"]
+script = ExtResource("1_tb5k0")
+id = "txt_supervisor"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(0, 0)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = ""
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_si8h0"]
+script = ExtResource("1_tb5k0")
+id = "nombre"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(150, 135)
+color = Color(0.584314, 0, 0, 1)
+color_variable = ""
+texto_default = ""
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_58mvr"]
+script = ExtResource("1_tb5k0")
+id = "cargo"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(150, 155)
+color = Color(0.584314, 0, 0, 1)
+color_variable = ""
+texto_default = ""
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_eaxu1"]
+script = ExtResource("1_tb5k0")
+id = "departamento"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(150, 175)
+color = Color(0.584314, 0, 0, 1)
+color_variable = ""
+texto_default = "Departamento"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_mltug"]
+script = ExtResource("1_tb5k0")
+id = "txt_supervisor"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(15, 200)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = "Supervisor :"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 10.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_fd5yk"]
+script = ExtResource("1_tb5k0")
+id = "nombre_supervisor"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(150, 195)
+color = Color(0.584314, 0, 0, 1)
+color_variable = ""
+texto_default = "nombre_supervisor"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_pkagw"]
+script = ExtResource("1_tb5k0")
+id = "txt_antiguedad"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(15, 220)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = "Antiguedad :"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 10.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_g3330"]
+script = ExtResource("1_tb5k0")
+id = "antiguedad"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(150, 215)
+color = Color(0.584314, 0, 0, 1)
+color_variable = ""
+texto_default = "XX años"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_jbj5f"]
+script = ExtResource("1_tb5k0")
+id = "txt_desempeño"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(15, 240)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = "Desempeño :"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 10.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_f4sin"]
+script = ExtResource("1_tb5k0")
+id = "nivel_desempeño"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(150, 235)
+color = Color(0.584314, 0, 0, 1)
+color_variable = ""
+texto_default = "nivel_desempeño"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_cw14x"]
+script = ExtResource("1_tb5k0")
+id = "txt_observaciones"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(15, 320)
+color = Color(0, 0, 0, 1)
+color_variable = ""
+texto_default = "Observaciones  :"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 10.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_wqmks"]
+script = ExtResource("1_tb5k0")
+id = "observaciones"
+fuente = 0
+template_parrafo = ""
+posicion = Vector2(50, 400)
+color = Color(0.584314, 0, 0, 1)
+color_variable = ""
+texto_default = "OBSERVACIONES"
+size = Vector2(200, 10)
+capa = ""
+visible = false
+editable = false
+font_size = 15.0
+clip_content = false
+bbcode_activo = false
+multilinea = false
+alineacion_horizontal = 0
+alineacion_vertical = 0
+autowrap = true
+
+[sub_resource type="Resource" id="Resource_pnoh4"]
+script = ExtResource("2_cbill")
+"tamaño" = Vector2(365, 200)
+grosor_borde = 1.0
+color_borde = Color(0, 0, 0, 1)
+color_relleno = Color(1, 1, 1, 0)
+posicion = Vector2(10, 340)
+
+[sub_resource type="Resource" id="Resource_q6l2x"]
+script = ExtResource("2_t6b4u")
+id = "timbre"
+posicion = Vector2(0, 0)
+size = Vector2(0, 0)
+
+[resource]
+script = ExtResource("1_j7ubt")
+id = "HOJA_ANTECEDENTES"
+template_id = "HOJA_ANTECEDENTES"
+textura_base = ExtResource("3_xqmsd")
+imagenes = Array[ExtResource("2_t6b4u")]([SubResource("Resource_q6l2x")])
+campos = Array[ExtResource("1_tb5k0")]([SubResource("Resource_jaxxe"), SubResource("Resource_iub4p"), SubResource("Resource_ao0ma"), SubResource("Resource_66a0c"), SubResource("Resource_hfe3k"), SubResource("Resource_si8h0"), SubResource("Resource_58mvr"), SubResource("Resource_eaxu1"), SubResource("Resource_mltug"), SubResource("Resource_fd5yk"), SubResource("Resource_pkagw"), SubResource("Resource_g3330"), SubResource("Resource_jbj5f"), SubResource("Resource_f4sin"), SubResource("Resource_cw14x"), SubResource("Resource_wqmks")])
+dibujos = Array[Resource("res://gd/dibujo_documento.gd")]([SubResource("Resource_pnoh4")])
+color_papel = Color(0, 0, 0, 1)
+tipo_timbre = ""
+posiciones_timbres = Array[Vector2]([])
+posiciones_firmas = Array[Vector2]([])
+cantidad_max_timbres = 3

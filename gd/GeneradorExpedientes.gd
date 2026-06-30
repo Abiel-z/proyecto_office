@@ -28,23 +28,41 @@ static func generar(trabajador : Trabajador) -> ExpedienteLaboral:
 
 	# CONFIGURACION INFORME MEDICO
 	var informe_medico = Informe.new()
+	var historial_medico := []
+	var contador_medico  := 0
 	informe_medico.tipo = DatabaseTipoDocumento.INFORMES["MEDICO"]
 	informe_medico.subject = trabajador
 	informe_medico.metadata = {
 		"nombre" : trabajador.nombre,
 		"rut_id" : trabajador.rut
 	}
-	var contador_medico := 0
+
 	for evento in trabajador.eventos.get("EVENTO_MEDICO", []):
 		contador_medico += 1
-		var doc = Documento.new()
-		doc.id = "EVENTO_MEDICO_%s_%s" % [trabajador.id,contador_medico]
-		doc.tipo = DatabaseTipoDocumento.DOCUMENTOS["EXAMEN_MEDICO"]
-		doc.metadata = evento
-		doc.subject = trabajador
-		expediente.documentos.append(doc)
-		informe_medico.documentos_requeridos.append(doc.id)
-	# FINC CONFIGURACION INFORME MEDICO
+		var nuevo_evento =  DocumentBuilder.construir_nombre_historial(evento)
+		historial_medico.append(nuevo_evento)
+		# CREAR EVENTO
+		var documento_evento = DocumentoCompuesto.new()
+		documento_evento.id = "%s_%s_%s" % [ evento.categoria, trabajador.id, contador_medico ]
+		documento_evento.categoria = evento.categoria
+		documento_evento.paginas_requeridas = DatabaseTipoDocumento.DOCUMENTOS[documento_evento.categoria].paginas.duplicate()
+		documento_evento.metadata = DocumentBuilder.construir_metadata_evento(trabajador,evento)
+		documento_evento.subject = trabajador
+		
+		for pagina_id in documento_evento.paginas_requeridas:
+			var pagina = PaginaDocumento.new()
+			pagina.id = "%s_%s_%s" % [
+				pagina_id,
+				documento_evento.id,
+				trabajador.id
+			]
+			pagina.documento_id = documento_evento.id
+			pagina.tipo = DatabaseTipoDocumento.PAGINAS[pagina_id]
+			pagina.metadata = documento_evento.metadata
+			documento_evento.agregar_pagina(pagina)
+		expediente.documentos.append(documento_evento)
+		informe_medico.documentos_requeridos.append(documento_evento.id)
+	# FIN CONFIGURACION INFORME MEDICO
 
 
 
@@ -63,7 +81,7 @@ static func generar(trabajador : Trabajador) -> ExpedienteLaboral:
 		# CREAR INCIDENTE
 		var documento_evento = DocumentoCompuesto.new()
 		documento_evento.id = "INFORME_INCIDENTE_%s_%s" % [ trabajador.id, contador_conductual ]
-		documento_evento.paginas_requeridas = DatabaseTipoDocumento.ARCHIVOS_POR_DOCUMENTO["INFORME_INCIDENTE"].duplicate()
+		documento_evento.paginas_requeridas = DatabaseTipoDocumento.ARCHIVOS_POR_DOCUMENTO["INCIDENTE"].duplicate()
 		documento_evento.metadata = DocumentBuilder.construir_metadata_evento(trabajador,evento)
 		documento_evento.subject = trabajador
 		
@@ -75,7 +93,7 @@ static func generar(trabajador : Trabajador) -> ExpedienteLaboral:
 				trabajador.id
 			]
 			pagina.documento_id = documento_evento.id
-			pagina.tipo = DatabaseTipoDocumento.DOCUMENTOS[pagina_id]
+			pagina.tipo = DatabaseTipoDocumento.PAGINAS[pagina_id]
 			pagina.metadata = documento_evento.metadata
 			documento_evento.agregar_pagina(pagina)
 		expediente.documentos.append(documento_evento)

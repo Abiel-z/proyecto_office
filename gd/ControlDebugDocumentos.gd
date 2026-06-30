@@ -102,7 +102,6 @@ func actualizar_visual():
 		return
 
 	if capa_dibujos == null:
-		print("CAPA DIBUJOS NULL")
 		return
 	
 	if tipo_documento == null:
@@ -128,8 +127,7 @@ func actualizar_visual():
 				"timbre" : texture_rect.texture = empresa_debug.timbre_empresa
 				"firma_subject" : texture_rect.texture = empresa_debug.firma
 				"firma_owner" :  texture_rect.texture = empresa_debug.firma
-			print("CONFIGURANDO ", imagen.id)
-			
+
 			#texture_rect.texture = imagen.textura
 			texture_rect.position = imagen.posicion
 			texture_rect.size = imagen.size

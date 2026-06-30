@@ -29,6 +29,7 @@ DatabaseExpedientes="*res://gd/database_expedientes.gd"
 DatabaseTipoDocumento="*res://gd/database_tipo_documento.gd"
 TemplatesDocumentosDb="*res://templates_documentos_db.gd"
 DatabaseEmpresas="*res://gd/database_empresas.gd"
+DatabaseEventos="*res://gd/database_eventos.gd"
 
 [display]
 

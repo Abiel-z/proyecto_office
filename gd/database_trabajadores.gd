@@ -26,14 +26,14 @@ func cargar_trabajadores_iniciales():
 	ana.eventos["EVENTO_CONDUCTUAL"] = [
 		{
 			"fecha":"2026-02-15",
-			"tipo" : "Amonestacion",
+			"categoria" : "AMONESTACION",
 			"resultado" : "NEGATIVO",
 			"motivo":"Llegada tardía",
 			"gravedad" : 3
 		},
 		{
 			"fecha":"2025-04-10",
-			"tipo" : "Amonestacion",
+			"categoria" : "AMONESTACION",
 			"resultado" : "NEGATIVO",
 			"motivo":"Llegada tardía",
 			"gravedad" : 5
@@ -44,14 +44,14 @@ func cargar_trabajadores_iniciales():
 	#ana.eventos["EVENTO_MEDICO"] = [
 		#{
 			#"fecha":"2026-01-10",
-			#"tipo" : "Examen Rutinario",
+			#"categoria" : "EXAMEN_RUTINARIO",
 			#"resultado": "POSITIVO",
 			#"doc_extra" : null,
 			#"gravedad" : 5
 		#},
 		#{
 			#"fecha":"2026-01-10",
-			#"tipo" : "Pierna Rota",
+			#"categoria" : "ACCIDENTE_GRAVE",
 			#"resultado": "POSITIVO",
 			#"doc_extra" : Documento,
 			#"gravedad" : 5

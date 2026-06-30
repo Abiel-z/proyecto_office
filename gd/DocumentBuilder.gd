@@ -51,7 +51,7 @@ static func construir_paginas_compuestas(documento: DocumentoCompuesto, trabajad
 		pagina.documento_id = documento.id
 		pagina.subject_id = trabajador.id
 		pagina.subject = trabajador
-		pagina.tipo = DatabaseTipoDocumento.DOCUMENTOS[pagina_id]
+		pagina.tipo = DatabaseTipoDocumento.PAGINAS[pagina_id]
 		pagina.metadata = documento.metadata
 		documento.agregar_pagina(pagina)
 		

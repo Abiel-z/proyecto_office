@@ -1,7 +1,7 @@
 extends Node
 
 const TIPO_DOCUMENTO = {
-	"REVISION": preload("res://tres/Tipo_Documento/revision.tres")
+	"REVISION": preload("res://tres/Tipo_Documento/_otro/revision.tres")
 }
 
 func crear_revision(

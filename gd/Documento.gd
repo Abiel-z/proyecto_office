@@ -5,6 +5,7 @@ func get_hojas():
 	return self
 
 @export var tipo : TipoDocumento 
+@export var categoria : String
 @export var nombre : String
 @export var cargo : String
 @export var fecha : String

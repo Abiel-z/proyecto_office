@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="TipoDocumento" load_steps=2 format=3 uid="uid://kqsmd78alr3w"]
+
+[ext_resource type="Script" path="res://gd/TipoDocumento.gd" id="1_suiap"]
+
+[resource]
+script = ExtResource("1_suiap")
+id = ""
+template_id = ""
+imagenes = Array[Resource("res://gd/imagen_documento.gd")]([])
+campos = Array[Resource("res://gd/Campo documento/campo_documento.gd")]([])
+dibujos = Array[Resource("res://gd/dibujo_documento.gd")]([])
+color_papel = Color(0, 0, 0, 1)
+tipo_timbre = ""
+posiciones_timbres = Array[Vector2]([])
+posiciones_firmas = Array[Vector2]([])
+cantidad_max_timbres = 3
